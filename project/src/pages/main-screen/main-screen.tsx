@@ -1,15 +1,15 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import {SmallCard} from '../../index';
+import filmsInfo from '../../mock/films-info';
 
 type MainScreenProps = {
-  filmTitle: string;
-  filmGenre: string;
-  filmYear: string;
-  smallFilmCards: SmallCard[];
+  title: string;
+  genre: string;
+  year: number;
+  posterImage: string;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const {filmTitle, filmGenre, filmYear, smallFilmCards} = props;
+  const { title, genre, year, posterImage } = props;
 
   return (
     <>
@@ -44,14 +44,14 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={title} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmTitle}</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{year}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -112,7 +112,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {smallFilmCards.map((film) => <SmallFilmCard key={`${film.id}`} title={film.title} img={film.img}/>)}
+            {filmsInfo.map(({id, name, previewImage}) => <SmallFilmCard key={id} title={name} img={previewImage}/>)}
           </div>
 
           <div className="catalog__more">

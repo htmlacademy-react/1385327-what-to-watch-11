@@ -1,24 +1,23 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 
-import { SmallCard } from '../../index';
-
 type AppScreenProps = {
-  filmTitle: string;
-  filmGenre: string;
-  filmYear: string;
-  smallFilmCards: SmallCard[];
+  title: string;
+  genre: string;
+  year: number;
+  posterImage: string;
+
 }
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const {filmTitle, filmGenre, filmYear, smallFilmCards} = props;
+  const { title, genre, year, posterImage } = props;
 
   return (
     <MainScreen
-      filmTitle={filmTitle}
-      filmGenre={filmGenre}
-      filmYear={filmYear}
-      smallFilmCards={smallFilmCards}
+      title={title}
+      genre={genre}
+      year={year}
+      posterImage={posterImage}
     />
   );
 }

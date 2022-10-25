@@ -1,9 +1,11 @@
 type SmallFilmCardProps = {
   title: string;
   img: string;
-
 }
-function SmallFilmCard({title, img}: SmallFilmCardProps): JSX.Element {
+
+function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
+  const { title, img } = props;
+
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
