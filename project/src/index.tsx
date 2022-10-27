@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import App from './components/app/app';
 
 import filmsInfo from './mock/films-info';
@@ -11,10 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      title={filmsInfo[25].name}
-      genre={filmsInfo[25].genre}
-      year={filmsInfo[25].released}
-      posterImage={filmsInfo[25].posterImage}
+      film={filmsInfo[25]}
     />
   </React.StrictMode>,
 );
