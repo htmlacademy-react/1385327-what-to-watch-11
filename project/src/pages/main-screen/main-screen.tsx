@@ -1,18 +1,30 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import Logo from '../../components/logo/logo';
-
+import { AppRoute } from '../../const';
 import { Film } from '../../types/types';
 
-import filmsInfo from '../../mock/films-info';
+import ListFilm from '../../components/list-films/list-films';
+import Logo from '../../components/logo/logo';
+import Copyright from '../../components/copyright/copyright';
+import UserBlock from '../../components/user-block/user-block';
 
 type MainScreenProps = {
-  film: Film;
+  films: Film[];
+  mainFilm: Film;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const { film } = props;
+  const { films, mainFilm } = props;
+
+  const navigate = useNavigate();
+
+  const handlePlayMainFilmButtonClick = () => {
+    if (mainFilm === undefined) {
+      return navigate('*');
+    }
+    return navigate(`${AppRoute.Player}/${mainFilm.id}`);
+  };
 
   return (
     <>
@@ -21,7 +33,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
       </Helmet>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={mainFilm.backgroundImage} alt={mainFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -30,33 +42,24 @@ function MainScreen(props: MainScreenProps): JSX.Element {
 
           <Logo />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <img src={mainFilm.posterImage} alt={mainFilm.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{mainFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{mainFilm.genre}</span>
+                <span className="film-card__year">{mainFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={handlePlayMainFilmButtonClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -112,9 +115,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmsInfo.map((OneFilm) => <SmallFilmCard key={`${OneFilm.id}`} film={OneFilm}/>)}
-          </div>
+          <ListFilm films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -123,9 +124,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
 
         <footer className="page-footer">
           <Logo light />
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
+          <Copyright />
         </footer>
       </div>
     </>

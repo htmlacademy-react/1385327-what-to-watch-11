@@ -1,6 +1,27 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function PlayerScreen(): JSX.Element {
+import { AppRoute } from '../../const';
+import { Film } from '../../types/types';
+import { getFormatTime } from '../../utils';
+
+import NoFoundScreen from '../no-found-screen/no-found-screen';
+
+type PlayerScreenProps = {
+  films: Film[];
+}
+
+function PlayerScreen(props: PlayerScreenProps): JSX.Element {
+  const { films } = props;
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const film = films.find((elem: Film) => elem.id.toString() === params.id);
+  if (film === undefined) {
+    return <NoFoundScreen />;
+  }
+
   return (
     <div className="player">
       <Helmet>
@@ -8,7 +29,7 @@ function PlayerScreen(): JSX.Element {
       </Helmet>
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={() => navigate(AppRoute.Root)}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -16,7 +37,7 @@ function PlayerScreen(): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{getFormatTime(film.runTime)}</div>
         </div>
 
         <div className="player__controls-row">
@@ -26,7 +47,7 @@ function PlayerScreen(): JSX.Element {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">

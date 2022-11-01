@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+
 import Logo from '../../components/logo/logo';
+import Copyright from '../../components/copyright/copyright';
 
 function SingInScreen(): JSX.Element {
   return (
@@ -35,9 +37,7 @@ function SingInScreen(): JSX.Element {
 
       <footer className="page-footer">
         <Logo light />
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
+        <Copyright />
       </footer>
     </div>
   );

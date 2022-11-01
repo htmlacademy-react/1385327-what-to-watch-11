@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Film } from '../../types/types';
+import { Film, Review } from '../../types/types';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -15,12 +15,14 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import SingInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
 type AppScreenProps = {
-  film: Film;
+  films: Film[];
+  reviews: Review[];
+  mainFilm: Film;
 }
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const { film } = props;
+  const { films, reviews, mainFilm } = props;
 
   return (
     <HelmetProvider>
@@ -29,38 +31,34 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.Root}
             element={
-              <MainScreen
-                film={film}
-              />
+              <MainScreen films={films} mainFilm={mainFilm} />
             }
           />
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
-              >
-                <MyListScreen />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <MyListScreen films={films} />
               </PrivateRoute>
             }
           />
           <Route
-            path={AppRoute.AddReview}
+            path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
-              >
-                <AddReviewScreen />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <AddReviewScreen films={films} />
               </PrivateRoute>
             }
           />
           <Route
-            path={AppRoute.Player}
-            element={<PlayerScreen />}
+            path={`${AppRoute.Player}/:id`}
+            element={<PlayerScreen films={films} />}
           />
           <Route
-            path={AppRoute.Film}
-            element={<FilmScreen />}
+            path={`${AppRoute.Film}/:id`}
+            element={
+              <FilmScreen films={films} review={reviews[1]} />
+            }
           />
           <Route
             path={AppRoute.SingIn}
