@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 import filmsInfo from './mock/films-info';
+import reviews from './mock/reviews';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      film={filmsInfo[25]}
+      films={filmsInfo}
+      reviews={reviews}
+      mainFilm={filmsInfo[25]}
     />
   </React.StrictMode>,
 );

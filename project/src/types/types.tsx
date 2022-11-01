@@ -12,10 +12,27 @@ type Film = {
   scoresCount: number;
   director: string;
   starring: [string];
+  // starring: string[];
   runTime: number;
   genre: string;
   released: number;
   isFavorite: boolean;
 }
 
-export type { Film };
+type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    id: number;
+    name: string;
+  };
+}
+
+type NewReview = {
+  comment: string;
+  rating: number | null;
+}
+
+export type { Film, Review, NewReview };
