@@ -30,7 +30,7 @@ function MyListScreen(props: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {films.map((film) => <SmallFilmCard key={`${film.id}`} film={film}/>)}
+          {films.map((film) => <SmallFilmCard key={`${film.id}`} film={film} isActive={film.id.toString() === null}/>)}
         </div>
       </section>
 
@@ -43,3 +43,4 @@ function MyListScreen(props: MyListProps): JSX.Element {
 }
 
 export default MyListScreen;
+// null - activeId

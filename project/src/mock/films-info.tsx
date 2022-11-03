@@ -45,7 +45,7 @@ const filmsInfo: Film[] = [
     id: 2,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Legend',
@@ -114,7 +114,7 @@ const filmsInfo: Film[] = [
     id: 5,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Matrix',
@@ -137,7 +137,7 @@ const filmsInfo: Film[] = [
     id: 6,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Pulp Fiction',
@@ -183,7 +183,7 @@ const filmsInfo: Film[] = [
     id: 8,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Aviator',
@@ -206,7 +206,7 @@ const filmsInfo: Film[] = [
     id: 9,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Gangs of new york',
@@ -229,7 +229,7 @@ const filmsInfo: Film[] = [
     id: 10,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Bronson',
@@ -252,7 +252,7 @@ const filmsInfo: Film[] = [
     id: 11,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'War of the Worlds',
@@ -275,7 +275,7 @@ const filmsInfo: Film[] = [
     id: 12,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'The Revenant',
@@ -298,7 +298,7 @@ const filmsInfo: Film[] = [
     id: 13,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Beach',
@@ -321,7 +321,7 @@ const filmsInfo: Film[] = [
     id: 14,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Orlando',
@@ -367,7 +367,7 @@ const filmsInfo: Film[] = [
     id: 16,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Bohemian Rhapsody',
@@ -413,7 +413,7 @@ const filmsInfo: Film[] = [
     id: 18,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'No Country for Old Men',
@@ -459,7 +459,7 @@ const filmsInfo: Film[] = [
     id: 20,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Seven Years in Tibet',
@@ -505,7 +505,7 @@ const filmsInfo: Film[] = [
     id: 22,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'We need to talk about Kevin',
@@ -528,7 +528,7 @@ const filmsInfo: Film[] = [
     id: 23,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Dardjeeling Limited',
@@ -574,7 +574,7 @@ const filmsInfo: Film[] = [
     id: 25,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     id: 26,
@@ -584,7 +584,7 @@ const filmsInfo: Film[] = [
     backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
     backgroundColor: '#ffffff',
     videoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4',
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4',
     description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.',
     rating: 8.9,
     scoresCount: 240,
