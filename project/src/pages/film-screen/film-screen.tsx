@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-import { AppRoute } from '../../const';
+import { AppRoute, ScreenTab } from '../../const';
 import { Film, Review } from '../../types/types';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
@@ -10,6 +10,7 @@ import ListFilm from '../../components/list-films/list-films';
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';
+import FilmTabs from '../../components/film-tabs/film-tabs';
 
 type FilmCardProps = {
   films: Film[];
@@ -48,7 +49,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{film.name}/{review.id}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{film.genre}</span>
                 <span className="film-card__year">{film.released}</span>
@@ -74,45 +75,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
           </div>
         </div>
 
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
-            </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}/{review.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{film.description}</p>
-
-                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {film.starring} Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FilmTabs active={ScreenTab.Overview} film={film} />
       </section>
 
       <div className="page-content">

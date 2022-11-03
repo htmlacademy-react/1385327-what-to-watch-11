@@ -14,8 +14,10 @@ function ReviewForm({reviewedMovieId}: AddReviewFormPropsType): JSX.Element {
   };
 
   const [formState, setFormState] = useState(formData);
+
   const handleFormChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLTextAreaElement | HTMLInputElement;
+
     if (target.name === 'review-text') {
       setFormState({...formState, comment: target.value});
     }
