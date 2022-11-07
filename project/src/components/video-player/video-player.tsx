@@ -4,10 +4,11 @@ import { Film } from '../../types/types';
 type VideoPlayerProps = {
   film: Film;
   autoPlay: boolean;
-  muted: boolean;
+  // muted: boolean;
 }
 
-function VideoPlayer({film, autoPlay, muted}: VideoPlayerProps): JSX.Element {
+function VideoPlayer(props: VideoPlayerProps): JSX.Element {
+  const { film, autoPlay = true } = props;
   const [, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -26,22 +27,17 @@ function VideoPlayer({film, autoPlay, muted}: VideoPlayerProps): JSX.Element {
     });
 
     if (autoPlay) {
-      setTimeout(() => {
-        if (videoRef.current !== null) {
-          videoRef.current.play();
-        }
-
-      }, 1000);
+      videoRef.current.play();
       return;
     }
-    videoRef.current.pause();
+
     return () => {
       isVideoPlayerMounted = false;
     };
   }, [autoPlay]);
 
   return (
-    <video src={film.previewVideoLink} poster={film.previewImage} ref={videoRef} muted={muted}/>
+    <video src={film.previewVideoLink} poster={film.previewImage} ref={videoRef} muted autoPlay width="280" height="175" />
   );
 }
 
