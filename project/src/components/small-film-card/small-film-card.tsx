@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Film } from '../../types/types';
@@ -11,38 +11,28 @@ type SmallFilmCardProps = {
 function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const { film } = props;
 
-  let timerId: NodeJS.Timeout | undefined = undefined;
+  let timerId: NodeJS.Timeout;
 
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState(false);
 
-  const handleMouseOver = (evt: BaseSyntheticEvent) => {
+  const handleMouseOver = () => {
 
-    const target = evt.target as Element;
-    const parent = target.parentElement as Element;
-
-    if (parent.classList.contains('small-film-card') || target.tagName === 'A') {
-      timerId = setTimeout(() => {
-        setActiveId(parent.id);
-      }, 1000);
-    } else {
-      setActiveId(null);
-    }
+    timerId = setTimeout(() => {
+      setActiveId(true);
+    }, 1000);
   };
 
-  const handlerMouseOut = () => {
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-    setActiveId(null);
-
+  const handleMouseOut = () => {
+    clearTimeout(timerId);
+    setActiveId(false);
   };
 
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handlerMouseOut}>
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       <div className="small-film-card__image">
         {
           activeId ?
-            <VideoPlayer film={film} autoPlay /> :
+            <VideoPlayer film={film} /> :
             <img src={film.previewImage} alt={film.name} width="280" height="175"/>
         }
       </div>
