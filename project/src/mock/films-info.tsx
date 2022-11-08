@@ -13,8 +13,8 @@ const filmsInfo: Film[] = [
     director: 'Bradley Cooper',
     starring: [
       'Lady Gaga',
-      // 'Bradley Cooper',
-      // 'Sam Elliott'
+      'Bradley Cooper',
+      'Sam Elliott'
     ],
     runTime: 136,
     genre: 'Drama',
@@ -36,8 +36,8 @@ const filmsInfo: Film[] = [
     director: 'Wes Anderson',
     starring: [
       'Jared Gilman',
-      // "Kara Hayward",
-      // "Bruce Willis"
+      'Kara Hayward',
+      'Bruce Willis'
     ],
     runTime: 94,
     genre: 'Adventure',
@@ -45,7 +45,7 @@ const filmsInfo: Film[] = [
     id: 2,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Legend',
@@ -59,8 +59,8 @@ const filmsInfo: Film[] = [
     director: 'Brian Helgeland',
     starring: [
       'Tom Hardy',
-      // 'Emily Browning',
-      // 'Taron Egerton'
+      'Emily Browning',
+      'Taron Egerton'
     ],
     runTime: 132,
     genre: 'Crime',
@@ -82,8 +82,8 @@ const filmsInfo: Film[] = [
     director: 'David Yates',
     starring: [
       'Eddie Redmayne',
-      // 'Katherine Waterston',
-      // 'Dan Fogler'
+      'Katherine Waterston',
+      'Dan Fogler'
     ],
     runTime: 134,
     genre: 'Fantasy',
@@ -105,8 +105,8 @@ const filmsInfo: Film[] = [
     director: 'Jeff Nichols',
     starring: [
       'Michael Shannon',
-      // 'Joel Edgerton',
-      // 'Kirsten Dunst'
+      'Joel Edgerton',
+      'Kirsten Dunst'
     ],
     runTime: 112,
     genre: 'Action',
@@ -114,7 +114,7 @@ const filmsInfo: Film[] = [
     id: 5,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Matrix',
@@ -128,8 +128,8 @@ const filmsInfo: Film[] = [
     director: 'Wachowski Brothers',
     starring: [
       'Keanu Reeves',
-      // 'Laurence Fishburne',
-      // 'Carrie-Anne Moss'
+      'Laurence Fishburne',
+      'Carrie-Anne Moss'
     ],
     runTime: 136,
     genre: 'Action',
@@ -137,7 +137,7 @@ const filmsInfo: Film[] = [
     id: 6,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Pulp Fiction',
@@ -151,8 +151,8 @@ const filmsInfo: Film[] = [
     director: 'Quentin Tarantino',
     starring: [
       'John Travolta',
-      // 'Uma Thurman',
-      // 'Samuel L. Jackson'
+      'Uma Thurman',
+      'Samuel L. Jackson'
     ],
     runTime: 153,
     genre: 'Crime',
@@ -174,8 +174,8 @@ const filmsInfo: Film[] = [
     director: 'Martin Scorsese',
     starring: [
       'Leonardo DiCaprio',
-      // 'Emily Mortimer',
-      // 'Mark Ruffalo'
+      'Emily Mortimer',
+      'Mark Ruffalo'
     ],
     runTime: 138,
     genre: 'Thriller',
@@ -183,7 +183,7 @@ const filmsInfo: Film[] = [
     id: 8,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Aviator',
@@ -197,8 +197,8 @@ const filmsInfo: Film[] = [
     director: 'Martin Scorsese',
     starring: [
       'Leonardo DiCaprio',
-      // 'Cate Blanchett',
-      // 'Kate Beckinsale'
+      'Cate Blanchett',
+      'Kate Beckinsale'
     ],
     runTime: 170,
     genre: 'Drama',
@@ -206,7 +206,7 @@ const filmsInfo: Film[] = [
     id: 9,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Gangs of new york',
@@ -220,8 +220,8 @@ const filmsInfo: Film[] = [
     director: 'Martin Scorsese',
     starring: [
       'Leonardo DiCaprio',
-      // 'Cameron Diaz',
-      // 'Daniel Day-Lewis'
+      'Cameron Diaz',
+      'Daniel Day-Lewis'
     ],
     runTime: 167,
     genre: 'Crime',
@@ -229,7 +229,7 @@ const filmsInfo: Film[] = [
     id: 10,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Bronson',
@@ -243,8 +243,8 @@ const filmsInfo: Film[] = [
     director: 'Nicolas Winding Refn',
     starring: [
       'Tom Hardy',
-      // 'Kelly Adams',
-      // 'Luing Andrews'
+      'Kelly Adams',
+      'Luing Andrews'
     ],
     runTime: 92,
     genre: 'Action',
@@ -252,7 +252,7 @@ const filmsInfo: Film[] = [
     id: 11,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'War of the Worlds',
@@ -266,8 +266,8 @@ const filmsInfo: Film[] = [
     director: 'Steven Spielberg',
     starring: [
       'Tom Cruise',
-      // 'Dakota Fanning',
-      // 'Tim Robbins'
+      'Dakota Fanning',
+      'Tim Robbins'
     ],
     runTime: 116,
     genre: 'Adventure',
@@ -275,7 +275,7 @@ const filmsInfo: Film[] = [
     id: 12,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'The Revenant',
@@ -289,8 +289,8 @@ const filmsInfo: Film[] = [
     director: 'Alejandro G. Iñárritu',
     starring: [
       'Leonardo DiCaprio',
-      // 'Tom Hardy',
-      // 'Will Poulter'
+      'Tom Hardy',
+      'Will Poulter'
     ],
     runTime: 156,
     genre: 'Action',
@@ -298,7 +298,7 @@ const filmsInfo: Film[] = [
     id: 13,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Beach',
@@ -312,8 +312,8 @@ const filmsInfo: Film[] = [
     director: 'Danny Boyle',
     starring: [
       'Leonardo DiCaprio',
-      // 'Daniel York',
-      // 'Patcharawan Patarakijjanon'
+      'Daniel York',
+      'Patcharawan Patarakijjanon'
     ],
     runTime: 119,
     genre: 'Adventure',
@@ -321,7 +321,7 @@ const filmsInfo: Film[] = [
     id: 14,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bike.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Orlando',
@@ -335,8 +335,8 @@ const filmsInfo: Film[] = [
     director: 'Sally Potter',
     starring: [
       'Tilda Swinton',
-      // 'Billy Zane',
-      // 'Quentin Crisp'
+      'Billy Zane',
+      'Quentin Crisp'
     ],
     runTime: 94,
     genre: 'Drama',
@@ -358,8 +358,8 @@ const filmsInfo: Film[] = [
     director: 'Guy Ritchie',
     starring: [
       'Jason Statham',
-      // 'Brad Pitt',
-      // 'Benicio Del Toro'
+      'Brad Pitt',
+      'Benicio Del Toro'
     ],
     runTime: 104,
     genre: 'Comedy',
@@ -367,7 +367,7 @@ const filmsInfo: Film[] = [
     id: 16,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Bohemian Rhapsody',
@@ -381,8 +381,8 @@ const filmsInfo: Film[] = [
     director: 'Bryan Singer',
     starring: [
       'Rami Malek',
-      // 'Lucy Boynton',
-      // 'Gwilym Lee'
+      'Lucy Boynton',
+      'Gwilym Lee'
     ],
     runTime: 134,
     genre: 'Drama',
@@ -404,8 +404,8 @@ const filmsInfo: Film[] = [
     director: 'Jemaine Clement',
     starring: [
       'Kayvan Novak',
-      // 'Matt Berry',
-      // 'Natasia Demetriou'
+      'Matt Berry',
+      'Natasia Demetriou'
     ],
     runTime: 30,
     genre: 'Comedy',
@@ -413,7 +413,7 @@ const filmsInfo: Film[] = [
     id: 18,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'No Country for Old Men',
@@ -427,8 +427,8 @@ const filmsInfo: Film[] = [
     director: 'Ethan Coen',
     starring: [
       'Tommy Lee Jones',
-      // 'Javier Bardem',
-      // 'Josh Brolin'
+      'Javier Bardem',
+      'Josh Brolin'
     ],
     runTime: 122,
     genre: 'Crime',
@@ -450,8 +450,8 @@ const filmsInfo: Film[] = [
     director: 'Sergio Leone',
     starring: [
       'Robert De Niro',
-      // 'James Woods',
-      // 'Elizabeth McGovern'
+      'James Woods',
+      'Elizabeth McGovern'
     ],
     runTime: 229,
     genre: 'Crime',
@@ -459,7 +459,7 @@ const filmsInfo: Film[] = [
     id: 20,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Seven Years in Tibet',
@@ -473,8 +473,8 @@ const filmsInfo: Film[] = [
     director: 'Jean-Jacques Annaud',
     starring: [
       'Brad Pitt',
-      // 'David Thewlis',
-      // 'BD Wong'
+      'David Thewlis',
+      'BD Wong'
     ],
     runTime: 136,
     genre: 'Adventure',
@@ -496,8 +496,8 @@ const filmsInfo: Film[] = [
     director: 'Justin Kurzel',
     starring: [
       'Michael Fassbender',
-      // 'Marion Cotillard',
-      // 'Jack Madigan'
+      'Marion Cotillard',
+      'Jack Madigan'
     ],
     runTime: 113,
     genre: 'Drama',
@@ -505,7 +505,7 @@ const filmsInfo: Film[] = [
     id: 22,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'We need to talk about Kevin',
@@ -519,8 +519,8 @@ const filmsInfo: Film[] = [
     director: 'Lynne Ramsay',
     starring: [
       'Tilda Swinton',
-      // 'John C. Reilly',
-      // 'Ezra Miller'
+      'John C. Reilly',
+      'Ezra Miller'
     ],
     runTime: 112,
     genre: 'Drama',
@@ -528,7 +528,7 @@ const filmsInfo: Film[] = [
     id: 23,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     name: 'Dardjeeling Limited',
@@ -542,8 +542,8 @@ const filmsInfo: Film[] = [
     director: 'Wes Anderson',
     starring: [
       'Owen Wilson',
-      // 'Adrien Brody',
-      // 'Jason Schwartzman'
+      'Adrien Brody',
+      'Jason Schwartzman'
     ],
     runTime: 91,
     genre: 'Adventure',
@@ -565,8 +565,8 @@ const filmsInfo: Film[] = [
     director: 'Peter Howitt',
     starring: [
       'Rowan Atkinson',
-      // 'John Malkovich',
-      // 'Natalie Imbruglia'
+      'John Malkovich',
+      'Natalie Imbruglia'
     ],
     runTime: 88,
     genre: 'Comedy',
@@ -574,7 +574,7 @@ const filmsInfo: Film[] = [
     id: 25,
     isFavorite: false,
     videoLink: 'https://11.react.pages.academy/static/film/video/matrix.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4'
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
   },
   {
     id: 26,
@@ -584,7 +584,7 @@ const filmsInfo: Film[] = [
     backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
     backgroundColor: '#ffffff',
     videoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4',
-    previewVideoLink: 'https://11.react.pages.academy/static/film/video/dog.mp4',
+    previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4',
     description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustaves friend and protege.',
     rating: 8.9,
     scoresCount: 240,
