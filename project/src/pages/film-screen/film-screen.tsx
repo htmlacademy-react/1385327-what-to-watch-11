@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-import { AppRoute, ScreenTab } from '../../const';
+import { AppRoute } from '../../const';
 import { Film, Review } from '../../types/types';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
@@ -75,7 +75,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
           </div>
         </div>
 
-        <FilmTabs active={ScreenTab.Overview} film={film} />
+        <FilmTabs film={film} review={review}/>
       </section>
 
       <div className="page-content">
@@ -95,4 +95,4 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
     </>
   );
 }
-export default FilmScreen;
+export default FilmScreen; // active={ScreenTab.Overview}

@@ -1,25 +1,36 @@
-import { Film } from '../../types/types';
+import { Review } from '../../types/types';
 
 type FilmReviewsProps = {
-  film: Film;
+  review: Review;
 }
 
 function FilmReviews(props: FilmReviewsProps): JSX.Element {
-  const { film } = props;
+  const { review } = props;
 
   return (
     <>
-      <div className="film-rating">
-        <div className="film-rating__score">{film.rating}</div>
-        <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
-          <span className="film-rating__count">240 ratings</span>
-        </p>
+      <div className="film-card__reviews film-card__row">
+        <div className="film-card__reviews-col">
+
+          <div className="review">
+            <blockquote className="review__quote">
+              <p className="review__text">{review.comment}</p>
+              <footer className="review__details">
+                <cite className="review__author">{review.user.name}</cite>
+                <time className="review__date" dateTime="2016-12-24">{review.date}December 24, 2016</time>
+              </footer>
+            </blockquote>
+            <div className="review__rating">{review.rating}</div>
+          </div>
+
+        </div>
       </div>
-      <div></div>
+
+      <div className="film-card__reviews-col">
+
+      </div>
     </>
   );
-
-
 }
+
 export default FilmReviews;

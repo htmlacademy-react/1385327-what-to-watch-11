@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Film } from '../../types/types';
@@ -11,19 +11,19 @@ type SmallFilmCardProps = {
 function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const { film } = props;
 
-  let timerId: NodeJS.Timeout;
-
+  const timerId = useRef<NodeJS.Timeout | null>(null);
   const [activeId, setActiveId] = useState(false);
 
   const handleMouseOver = () => {
-
-    timerId = setTimeout(() => {
+    timerId.current = setTimeout(() => {
       setActiveId(true);
     }, 1000);
   };
 
   const handleMouseOut = () => {
-    clearTimeout(timerId);
+    if (timerId.current){
+      clearTimeout(timerId.current);
+    }
     setActiveId(false);
   };
 
