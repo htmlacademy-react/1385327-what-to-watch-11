@@ -1,5 +1,5 @@
 import { Film } from '../../types/types';
-import { getFormatTime } from '../../utils';
+import { getFormatHoursAndMinutes } from '../../utils';
 
 type FilmDetailsProps = {
   film: Film;
@@ -8,7 +8,7 @@ type FilmDetailsProps = {
 function FilmDetails(props: FilmDetailsProps): JSX.Element {
   const { film } = props;
 
-  const actorList = film.starring.join(', ');
+  const actorList = film.starring.join('\n'); // не работает...
 
   return (
     <div className="film-card__text film-card__row">
@@ -26,7 +26,7 @@ function FilmDetails(props: FilmDetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{getFormatTime(film.runTime)}</span>
+          <span className="film-card__details-value">{getFormatHoursAndMinutes(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

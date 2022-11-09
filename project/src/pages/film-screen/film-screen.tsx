@@ -14,15 +14,17 @@ import FilmTabs from '../../components/film-tabs/film-tabs';
 
 type FilmCardProps = {
   films: Film[];
-  review: Review;
+  reviews: Review[];
 }
 
 function FilmScreen(props: FilmCardProps): JSX.Element {
-  const { films, review } = props;
+  const { films, reviews } = props;
 
   const navigate = useNavigate();
   const params = useParams();
   const film = films.find((item: Film) => item.id.toString() === params.id);
+
+  const filteredFilms = films.filter((item) => item.genre === film?.genre && item.id !== film?.id);
 
   if (film === undefined) {
     return <NoFoundScreen />;
@@ -49,7 +51,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}/{review.id}</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{film.genre}</span>
                 <span className="film-card__year">{film.released}</span>
@@ -75,16 +77,13 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
           </div>
         </div>
 
-        <FilmTabs film={film} review={review}/>
+        <FilmTabs film={film} reviews={reviews}/>
       </section>
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__films-list">
-            <ListFilm films={films.slice(0, 4)}/>
-          </div>
+          <ListFilm films={filteredFilms.slice(0, 4)}/>
         </section>
 
         <footer className="page-footer">
@@ -95,4 +94,4 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
     </>
   );
 }
-export default FilmScreen; // active={ScreenTab.Overview}
+export default FilmScreen;

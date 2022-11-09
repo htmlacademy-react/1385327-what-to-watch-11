@@ -10,11 +10,11 @@ import FilmReviews from '../film-reviews/film-reviews';
 
 type FilmCardProps = {
   film: Film;
-  review: Review;
+  reviews: Review[];
 }
 
 function FilmTabs(props: FilmCardProps): JSX.Element {
-  const { film, review} = props;
+  const { film, reviews} = props;
 
   const [activeTab, setActiveTab] = useState<number>(ScreenTab.Overview);
 
@@ -25,7 +25,7 @@ function FilmTabs(props: FilmCardProps): JSX.Element {
       case ScreenTab.Details:
         return <FilmDetails film={film} />;
       case ScreenTab.Reviews:
-        return <FilmReviews review={review} />;
+        return <FilmReviews reviews={reviews} />;
     }
   };
 
