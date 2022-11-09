@@ -50,6 +50,36 @@ const reviews: Review[] = [
     rating: 2.4,
     comment: 'A movie that will take you to another world full of emotions.',
     date: '2022-09-27T13:58:46.523Z'
+  },
+  {
+    id: 6,
+    user: {
+      id: 16,
+      name: 'Mollie'
+    },
+    rating: 1.0,
+    comment: 'The editing is a mess, and the transitions of the plot or characters are rather strange. There is no narrative focus and the storytelling is unbalanced. I cannot really understand why such a bad movie received an overwhelming approval from the critics. ',
+    date: '2022-09-27T13:58:46.523Z'
+  },
+  {
+    id: 7,
+    user: {
+      id: 16,
+      name: 'Mollie'
+    },
+    rating: 4.8,
+    comment: 'A movie that will take you to another world full of emotions.',
+    date: '2022-09-27T13:58:46.523Z'
+  },
+  {
+    id: 8,
+    user: {
+      id: 16,
+      name: 'Mollie'
+    },
+    rating: 3.4,
+    comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director _ s funniest and most exquisitely designed movies in years.',
+    date: '2022-09-27T13:58:46.523Z'
   }
 
 ];
