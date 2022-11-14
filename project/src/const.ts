@@ -18,3 +18,6 @@ export enum ScreenTab {
   Details,
   Reviews
 }
+export const DEFAULT_GENRE_FILTER = 'All Genres';
+
+export const MAX_COUNT = 8;

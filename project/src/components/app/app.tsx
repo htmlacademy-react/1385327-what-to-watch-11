@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
+import { setFilms } from '../../store/action';
+import { useAppDispatch } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Film, Review } from '../../types/types';
 
@@ -24,6 +26,9 @@ function App(props: AppScreenProps): JSX.Element {
 
   const { films, reviews, mainFilm } = props;
 
+  const dispatch = useAppDispatch();
+  dispatch(setFilms());
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -31,7 +36,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.Root}
             element={
-              <MainScreen films={films} mainFilm={mainFilm} />
+              <MainScreen mainFilm={mainFilm} />
             }
           />
           <Route

@@ -3,11 +3,11 @@ import { Film } from '../../types/types';
 
 import SmallFilmCard from '../small-film-card/small-film-card';
 
-type ListFilmProps = {
+type FilmsListProps = {
   films: Film[];
 }
 
-function ListFilm(props: ListFilmProps): JSX.Element {
+function FilmsList(props: FilmsListProps): JSX.Element {
   const { films } = props;
 
   return (
@@ -17,4 +17,4 @@ function ListFilm(props: ListFilmProps): JSX.Element {
   );
 }
 
-export default ListFilm;
+export default FilmsList;
