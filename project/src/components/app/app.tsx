@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { getFilms } from '../../store/action';
+import { setFilms } from '../../store/action';
 import { useAppDispatch } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Film, Review } from '../../types/types';
@@ -27,7 +27,7 @@ function App(props: AppScreenProps): JSX.Element {
   const { films, reviews, mainFilm } = props;
 
   const dispatch = useAppDispatch();
-  dispatch(getFilms());
+  dispatch(setFilms());
 
   return (
     <HelmetProvider>

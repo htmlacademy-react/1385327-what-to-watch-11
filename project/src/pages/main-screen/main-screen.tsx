@@ -6,18 +6,18 @@ import { AppRoute, DEFAULT_GENRE_FILTER } from '../../const';
 import { Film } from '../../types/types';
 
 import GenresList from '../../components/genres-list/genres-list';
-import ListFilm from '../../components/list-films/list-films';
+import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
+import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 
 type MainScreenProps = {
-  // films: Film[];
   mainFilm: Film;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const { mainFilm } = props; // films,
+  const { mainFilm } = props;
 
   const genreFilter = useAppSelector((state) => state.genreFilter);
   const films: Film[] = useAppSelector((state) => state.films);
@@ -92,11 +92,10 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList films={films}/>
-          <ListFilm films={filteredFilms}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmsList films={filteredFilms}/>
+
+          <ShowMore/>
         </section>
 
         <footer className="page-footer">

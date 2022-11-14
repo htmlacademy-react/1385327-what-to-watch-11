@@ -6,7 +6,7 @@ import { Film, Review } from '../../types/types';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
-import ListFilm from '../../components/list-films/list-films';
+import ListFilm from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';

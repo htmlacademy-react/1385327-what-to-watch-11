@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeFilter, getFilms } from './action';
+import { changeFilter, setFilms } from './action';
 
 import { Film } from '../types/types';
 import { DEFAULT_GENRE_FILTER } from '../const';
@@ -13,7 +13,7 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(getFilms, (state) => {
+    .addCase(setFilms, (state) => {
       state.films = filmsInfo;
     })
     .addCase(changeFilter, (state, action) => {
