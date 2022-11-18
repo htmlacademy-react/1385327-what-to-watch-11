@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { resetFilmsList } from '../../store/action';
 
 import { Film } from '../../types/types';
 import VideoPlayer from '../video-player/video-player';
@@ -11,6 +13,7 @@ type SmallFilmCardProps = {
 function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const { film } = props;
 
+  const dispatch = useAppDispatch();
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const [activeId, setActiveId] = useState(false);
 
@@ -27,8 +30,12 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
     setActiveId(false);
   };
 
+  const handleFilmClick = () => {
+    dispatch(resetFilmsList());
+  };
+
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleFilmClick}>
       <div className="small-film-card__image">
         {
           activeId ?
