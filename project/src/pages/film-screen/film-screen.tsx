@@ -6,11 +6,11 @@ import { Film, Review } from '../../types/types';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
-import ListFilm from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';
 import FilmTabs from '../../components/film-tabs/film-tabs';
+import FilmsList from '../../components/films-list/films-list';
 
 type FilmCardProps = {
   films: Film[];
@@ -83,7 +83,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <ListFilm films={filteredFilms.slice(0, 4)}/>
+          <FilmsList films={filteredFilms.slice(0, 4)}/>
         </section>
 
         <footer className="page-footer">

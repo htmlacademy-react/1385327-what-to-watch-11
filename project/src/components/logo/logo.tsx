@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 type LogoProps = {
   light?: boolean;
@@ -10,11 +10,11 @@ function Logo({light = false}: LogoProps): JSX.Element {
 
   return (
     <div className="logo">
-      <Link className={linkClass} to="/">
+      <a className={linkClass} href="/">
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>
-      </Link>
+      </a>
     </div>
   );
 }

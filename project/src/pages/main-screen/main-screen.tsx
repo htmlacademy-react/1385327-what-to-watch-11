@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
+import { createFilmsList } from '../../store/action';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AppRoute, DEFAULT_GENRE_FILTER } from '../../const';
 import { Film } from '../../types/types';
 
@@ -21,12 +22,18 @@ function MainScreen(props: MainScreenProps): JSX.Element {
 
   const genreFilter = useAppSelector((state) => state.genreFilter);
   const films: Film[] = useAppSelector((state) => state.films);
+  const filmsCount = useAppSelector((state) => state.filmsCount);
 
   const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
     ? films
     : films.filter((film) => film.genre === genreFilter);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleShowMoreButtonClick = () => {
+    dispatch(createFilmsList());
+  };
 
   const handlePlayMainFilmButtonClick = () => {
     if (mainFilm === undefined) {
@@ -93,9 +100,8 @@ function MainScreen(props: MainScreenProps): JSX.Element {
 
           <GenresList films={films}/>
 
-          <FilmsList films={filteredFilms}/>
-
-          <ShowMore/>
+          <FilmsList films={filteredFilms.slice(0, filmsCount)}/>
+          {((filteredFilms.length - filmsCount) > 0 ) && <ShowMore onClick={handleShowMoreButtonClick}/>}
         </section>
 
         <footer className="page-footer">
