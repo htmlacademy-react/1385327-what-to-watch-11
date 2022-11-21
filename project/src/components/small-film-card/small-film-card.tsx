@@ -35,7 +35,7 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   };
 
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleFilmClick}>
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       <div className="small-film-card__image">
         {
           activeId ?
@@ -44,7 +44,7 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
         }
       </div>
       <h3 className="small-film-card__title" id={film.id.toString()}>
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
+        <Link className="small-film-card__link" to={`/films/${film.id}`} onClick={handleFilmClick}>{film.name}</Link>
       </h3>
     </article>
   );
