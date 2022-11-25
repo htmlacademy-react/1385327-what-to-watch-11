@@ -11,7 +11,6 @@ type Film = {
   rating: number;
   scoresCount: number;
   director: string;
-  // starring: [string];
   starring: string[];
   runTime: number;
   genre: string;
@@ -35,4 +34,15 @@ type NewReview = {
   rating: number | null;
 }
 
-export type { Film, Review, NewReview };
+type AuthData = {
+  login: string;
+  password: string;
+};
+
+type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type { Film, Review, NewReview, AuthData, UserData };

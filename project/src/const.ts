@@ -7,6 +7,12 @@ export enum AppRoute {
   Player = '/player',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -21,3 +27,5 @@ export enum ScreenTab {
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 
 export const MAX_COUNT = 8;
+
+export const TIMEOUT_SHOW_ERROR = 5000;

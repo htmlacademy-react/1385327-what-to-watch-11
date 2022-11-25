@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { setFilms } from '../../store/action';
-import { useAppDispatch } from '../../hooks';
-import { AppRoute, AuthorizationStatus } from '../../const';
+// import { setFilms } from '../../store/action';
+import { useAppSelector } from '../../hooks'; //useAppDispatch,
+import { AppRoute } from '../../const'; //, AuthorizationStatus
 import { Film, Review } from '../../types/types';
 
 import PrivateRoute from '../private-route/private-route';
@@ -14,20 +14,31 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import SingInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
 type AppScreenProps = {
-  films: Film[];
+  // films: Film[];
   reviews: Review[];
   mainFilm: Film;
 }
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const { films, reviews, mainFilm } = props;
+  const { reviews, mainFilm } = props; //films,
 
-  const dispatch = useAppDispatch();
-  dispatch(setFilms());
+  // const dispatch = useAppDispatch();
+  // dispatch(setFilms());
+  const films = useAppSelector((state) => state.films);
+
+  const isLoading = useAppSelector((state) => state.isFilmsLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  if (isLoading) {
+    return(
+      <LoadingScreen/>
+    );
+  }
 
   return (
     <HelmetProvider>
@@ -42,7 +53,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <MyListScreen films={films} />
               </PrivateRoute>
             }
@@ -50,7 +61,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <AddReviewScreen films={films} />
               </PrivateRoute>
             }
