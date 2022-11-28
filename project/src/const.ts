@@ -1,6 +1,6 @@
 export enum AppRoute {
   Root = '/',
-  SingIn = '/login',
+  SignIn = '/login',
   MyList = '/mylist',
   Film = '/films',
   AddReview = '/review',
@@ -11,6 +11,7 @@ export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Promo = '/promo',
 }
 
 export enum AuthorizationStatus {
@@ -27,5 +28,3 @@ export enum ScreenTab {
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 
 export const MAX_COUNT = 8;
-
-export const TIMEOUT_SHOW_ERROR = 5000;

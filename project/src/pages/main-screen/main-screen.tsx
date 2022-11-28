@@ -17,12 +17,13 @@ type MainScreenProps = {
   mainFilm: Film;
 }
 
-function MainScreen(props: MainScreenProps): JSX.Element {
+function MainScreen(props: MainScreenProps): JSX.Element { //props: MainScreenProps
   const { mainFilm } = props;
 
   const genreFilter = useAppSelector((state) => state.genreFilter);
   const films: Film[] = useAppSelector((state) => state.films);
   const filmsCount = useAppSelector((state) => state.filmsCount);
+  // const mainFilm = useAppSelector((state) => state.promo);
 
   const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
     ? films

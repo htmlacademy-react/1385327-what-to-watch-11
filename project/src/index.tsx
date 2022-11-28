@@ -6,7 +6,9 @@ import { store } from './store';
 import { fetchFilms, checkAuthAction } from './store/api-actions';
 
 import App from './components/app/app';
-import ErrorMessage from './components/error-message/error-message';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import filmsInfo from './mock/films-info';
 import reviews from './mock/reviews';
@@ -21,9 +23,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ErrorMessage />
+      <ToastContainer />
       <App
-        // films={filmsInfo}
         reviews={reviews}
         mainFilm={filmsInfo[25]}
       />

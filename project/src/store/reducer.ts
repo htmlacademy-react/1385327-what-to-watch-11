@@ -1,10 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeFilter, resetFilmsList, createFilmsList, loadFilms, requireAuthorization, setFilmsLoadingStatus, setError } from './action'; //, setFilms
+import { changeFilter, resetFilmsList, createFilmsList, loadFilms, requireAuthorization, setFilmsLoadingStatus } from './action';
 
 import { Film } from '../types/types';
 import { DEFAULT_GENRE_FILTER, MAX_COUNT, AuthorizationStatus } from '../const';
-
-// import filmsInfo from '../mock/films-info';
+// import { fetchPromoFilm } from './api-actions';
 
 const initialState = {
   genreFilter: DEFAULT_GENRE_FILTER,
@@ -12,14 +11,11 @@ const initialState = {
   filmsCount: MAX_COUNT as number,
   authorizationStatus: AuthorizationStatus.Unknown,
   isFilmsLoading: false as boolean,
-  error: null as null | string,
+  // promo: {} as Film,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    // .addCase(setFilms, (state) => {
-    //   state.films = filmsInfo;
-    // })
     .addCase(changeFilter, (state, action) => {
       state.genreFilter = action.payload;
     })
@@ -37,9 +33,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setFilmsLoadingStatus, (state, action) => {
       state.isFilmsLoading = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 

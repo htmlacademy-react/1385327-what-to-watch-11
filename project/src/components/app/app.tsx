@@ -1,12 +1,14 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-// import { setFilms } from '../../store/action';
-import { useAppSelector } from '../../hooks'; //useAppDispatch,
-import { AppRoute } from '../../const'; //, AuthorizationStatus
+import { useAppSelector } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { Film, Review } from '../../types/types';
 
 import PrivateRoute from '../private-route/private-route';
+
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
@@ -15,26 +17,23 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
-import SingInScreen from '../../pages/sing-in-screen/sing-in-screen';
+import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
 type AppScreenProps = {
-  // films: Film[];
   reviews: Review[];
   mainFilm: Film;
 }
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const { reviews, mainFilm } = props; //films,
+  const { reviews, mainFilm } = props;
 
-  // const dispatch = useAppDispatch();
-  // dispatch(setFilms());
   const films = useAppSelector((state) => state.films);
 
   const isLoading = useAppSelector((state) => state.isFilmsLoading);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (isLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
     return(
       <LoadingScreen/>
     );
@@ -42,7 +41,7 @@ function App(props: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
@@ -77,15 +76,15 @@ function App(props: AppScreenProps): JSX.Element {
             }
           />
           <Route
-            path={AppRoute.SingIn}
-            element={<SingInScreen />}
+            path={AppRoute.SignIn}
+            element={<SignInScreen />}
           />
           <Route
             path="*"
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
