@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Film, Review } from '../../types/types';
+import { Review } from '../../types/types';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -21,14 +21,14 @@ import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
 type AppScreenProps = {
   reviews: Review[];
-  mainFilm: Film;
 }
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const { reviews, mainFilm } = props;
+  const { reviews } = props;
 
   const films = useAppSelector((state) => state.films);
+  const mainFilm = useAppSelector((state) => state.promo);
 
   const isLoading = useAppSelector((state) => state.isFilmsLoading);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);

@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { Film, Review } from '../../types/types';
+import {useAppSelector} from '../../hooks';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -25,6 +26,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
   const film = films.find((item: Film) => item.id.toString() === params.id);
 
   const filteredFilms = films.filter((item) => item.genre === film?.genre && item.id !== film?.id);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   if (film === undefined) {
     return <NoFoundScreen />;
@@ -71,7 +73,7 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={`${AppRoute.Film}/${film.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`${AppRoute.Film}/${film.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
