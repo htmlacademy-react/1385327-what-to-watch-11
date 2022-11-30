@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Film, Review } from '../../types/types';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchFilm, fetchReviews, fetchSimilarFilms } from '../../store/api-actions';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -12,23 +13,36 @@ import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import FilmsList from '../../components/films-list/films-list';
+// import LoadingScreen from '../../components/loading-screen/loading-screen';
 
-type FilmCardProps = {
-  films: Film[];
-  reviews: Review[];
-}
-
-function FilmScreen(props: FilmCardProps): JSX.Element {
-  const { films, reviews } = props;
+function FilmScreen(): JSX.Element {
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const params = useParams();
-  const film = films.find((item: Film) => item.id.toString() === params.id);
 
-  const filteredFilms = films.filter((item) => item.genre === film?.genre && item.id !== film?.id);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const film = useAppSelector((state) => state.film);
+  const reviews = useAppSelector((state) => state.reviews);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
+  const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
+  // const filteredFilms = films.filter((item) => item.genre === film.genre && item.id !== film.id);
 
-  if (film === undefined) {
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchFilm(params.id));
+      dispatch(fetchSimilarFilms(params.id));
+      dispatch(fetchReviews(params.id));
+    }
+  }, [params.id, dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [params.id]);
+
+  // const film = films.find((item: Film) => item.id.toString() === params.id);
+
+  if (!film && !isFilmLoading) {//film === undefined
     return <NoFoundScreen />;
   }
 
@@ -79,13 +93,13 @@ function FilmScreen(props: FilmCardProps): JSX.Element {
           </div>
         </div>
 
-        <FilmTabs film={film} reviews={reviews}/>
+        {film && (<FilmTabs film={film} reviews={reviews}/>)}
       </section>
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={filteredFilms.slice(0, 4)}/>
+          <FilmsList films={similarFilms.slice(0, 4)}/>
         </section>
 
         <footer className="page-footer">

@@ -10,6 +10,8 @@ export const createFilmsList = createAction('main/createFilmsList');
 
 export const resetFilmsList = createAction('main/resetFilmsList');
 
+export const loadSimilarFilms = createAction<Film[]>('data/loadSimilarFilms');
+
 export const loadFilm = createAction<Film>('data/loadFilm');
 
 export const loadFilms = createAction<Film[]>('data/loadFilms');

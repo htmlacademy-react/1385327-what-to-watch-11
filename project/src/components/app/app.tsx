@@ -3,7 +3,6 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Review } from '../../types/types';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -19,16 +18,9 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
-type AppScreenProps = {
-  reviews: Review[];
-}
-
-function App(props: AppScreenProps): JSX.Element {
-
-  const { reviews } = props;
+function App(): JSX.Element {
 
   const films = useAppSelector((state) => state.films);
-  const mainFilm = useAppSelector((state) => state.promo);
 
   const isLoading = useAppSelector((state) => state.isFilmsLoading);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -46,7 +38,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.Root}
             element={
-              <MainScreen mainFilm={mainFilm} />
+              <MainScreen />
             }
           />
           <Route
@@ -61,7 +53,7 @@ function App(props: AppScreenProps): JSX.Element {
             path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <AddReviewScreen films={films} />
+                <AddReviewScreen />
               </PrivateRoute>
             }
           />
@@ -72,7 +64,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route
             path={`${AppRoute.Film}/:id`}
             element={
-              <FilmScreen films={films} reviews={reviews} />
+              <FilmScreen />
             }
           />
           <Route

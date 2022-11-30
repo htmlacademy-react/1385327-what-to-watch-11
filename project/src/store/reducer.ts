@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeFilter, resetFilmsList, createFilmsList, loadFilms, requireAuthorization, setFilmsLoadingStatus, loadPromo, loadReviews, loadFilm, setFilmLoadingStatus } from './action';
+import { changeFilter, resetFilmsList, createFilmsList, loadFilms, requireAuthorization, setFilmsLoadingStatus, loadPromo, loadReviews, loadFilm, setFilmLoadingStatus, loadSimilarFilms } from './action';
 
 import { Film, Review } from '../types/types';
 import { DEFAULT_GENRE_FILTER, MAX_COUNT, AuthorizationStatus } from '../const';
@@ -9,6 +9,7 @@ const initialState = {
   films: [] as Film[],
   film: {} as Film,
   filmsCount: MAX_COUNT as number,
+  similarFilms: [] as Film[],
   authorizationStatus: AuthorizationStatus.Unknown,
   isFilmsLoading: false as boolean,
   isFilmLoading: false as boolean,
@@ -26,6 +27,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetFilmsList, (state) => {
       state.filmsCount = MAX_COUNT;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
     })
     .addCase(loadFilm, (state, action) => {
       state.film = action.payload;

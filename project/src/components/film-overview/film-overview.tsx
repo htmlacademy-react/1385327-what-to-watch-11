@@ -7,7 +7,7 @@ type FilmOverviewProps = {
 function FilmOverview(props: FilmOverviewProps): JSX.Element {
   const { film } = props;
 
-  const actorList = film.starring.join(', ');
+  const actorList = film.starring; //.join(', ');
 
   const scoresRating = (rating: number) => {
     if (rating >= 0 && rating < 3) {

@@ -10,8 +10,6 @@ import App from './components/app/app';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import reviews from './mock/reviews';
-
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
@@ -24,9 +22,7 @@ root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ToastContainer />
-      <App
-        reviews={reviews}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

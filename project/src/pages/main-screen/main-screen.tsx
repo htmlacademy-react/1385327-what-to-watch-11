@@ -13,24 +13,19 @@ import Copyright from '../../components/copyright/copyright';
 import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 
-type MainScreenProps = {
-  mainFilm: Film;
-}
+function MainScreen(): JSX.Element {
 
-function MainScreen(props: MainScreenProps): JSX.Element { //props: MainScreenProps
-  const { mainFilm } = props;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const genreFilter = useAppSelector((state) => state.genreFilter);
   const films: Film[] = useAppSelector((state) => state.films);
   const filmsCount = useAppSelector((state) => state.filmsCount);
-  // const mainFilm = useAppSelector((state) => state.promo);
+  const mainFilm = useAppSelector((state) => state.promo);
 
   const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
     ? films
     : films.filter((film) => film.genre === genreFilter);
-
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const handleShowMoreButtonClick = () => {
     dispatch(createFilmsList());

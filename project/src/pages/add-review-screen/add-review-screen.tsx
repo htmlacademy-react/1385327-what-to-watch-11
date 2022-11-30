@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 
-import { Film } from '../../types/types';
+// import { Film } from '../../types/types';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -9,15 +10,16 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
 
-type AddReviewScreenProps = {
-  films: Film[];
-}
+// type AddReviewScreenProps = {
+//   films: Film[];
+// }
 
-function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
-  const { films } = props;
+function AddReviewScreen(): JSX.Element {//props: AddReviewScreenProps
+  // const { films } = props;
+  const film = useAppSelector((state) => state.film);
 
-  const params = useParams();
-  const film = films.find((item: Film) => item.id.toString() === params.id);
+  // const params = useParams();
+  // const film = films.find((item: Film) => item.id.toString() === params.id);
 
   if (film === undefined) {
     return <NoFoundScreen />;
