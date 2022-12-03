@@ -2,7 +2,7 @@ import { useState, SyntheticEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { postNewReview } from '../../store/api-actions';
 import { useNavigate } from 'react-router-dom';
-import { APIRoute } from '../../const';
+import { APIRoute, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 
 type AddReviewFormPropsType = {
   filmId: number;
@@ -15,6 +15,7 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
+    isFormDisabled: false,
   });
 
   const handleFormChange = (evt: SyntheticEvent) => {
@@ -77,7 +78,7 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
       <div className="add-review__text" style={{background: '#FFFFFF', opacity: '50%'}}>
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={formData.isFormDisabled || !(formData.comment.length > MIN_COMMENT_LENGTH && formData.comment.length < MAX_COMMENT_LENGTH && formData.rating !== 0)}>Post</button>
         </div>
 
       </div>

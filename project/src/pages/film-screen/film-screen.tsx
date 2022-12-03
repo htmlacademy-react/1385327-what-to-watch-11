@@ -22,11 +22,12 @@ function FilmScreen(): JSX.Element {
   const params = useParams();
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const film = useAppSelector((state) => state.film);
+  const film = useAppSelector((state) => state.film);//: Film | null
   const reviews = useAppSelector((state) => state.reviews);
   const similarFilms = useAppSelector((state) => state.similarFilms);
-  const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
+  // const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
   // const filteredFilms = films.filter((item) => item.genre === film.genre && item.id !== film.id);
+  // const error = useAppSelector((state) => state.error);
 
   useEffect(() => {
     if (params.id) {
@@ -34,7 +35,7 @@ function FilmScreen(): JSX.Element {
       dispatch(fetchSimilarFilms(params.id));
       dispatch(fetchReviews(params.id));
     }
-  }, [params.id, dispatch]);
+  }, [params.id, dispatch,]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,7 +43,7 @@ function FilmScreen(): JSX.Element {
 
   // const film = films.find((item: Film) => item.id.toString() === params.id);
 
-  if (!film && !isFilmLoading) {//film === undefined
+  if (!film.id) {
     return <NoFoundScreen />;
   }
 

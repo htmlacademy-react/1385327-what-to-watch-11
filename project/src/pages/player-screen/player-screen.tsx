@@ -1,22 +1,22 @@
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import { Film } from '../../types/types';
 import { getFormatTime } from '../../utils';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
-type PlayerScreenProps = {
-  films: Film[];
-}
+// type PlayerScreenProps = {
+//   films: Film[];
+// }
 
-function PlayerScreen(props: PlayerScreenProps): JSX.Element {
-  const { films } = props;
+function PlayerScreen(): JSX.Element {//props: PlayerScreenProps
+  // const { films } = props;
 
   const params = useParams();
   const navigate = useNavigate();
-
+  const films: Film[] = useAppSelector((state) => state.films);
   const film = films.find((elem: Film) => elem.id.toString() === params.id);
   if (film === undefined) {
     return <NoFoundScreen />;

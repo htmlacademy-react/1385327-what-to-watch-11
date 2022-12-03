@@ -15,6 +15,7 @@ const initialState = {
   isFilmLoading: false as boolean,
   promo: {} as Film,
   reviews: [] as Review[],
+  // error: false as boolean,
 };
 
 const reducer = createReducer(initialState, (builder) => {

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-
+import { useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';
@@ -8,12 +8,15 @@ import { Film } from '../../types/types';
 
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 
-type MyListProps = {
-  films: Film[];
-}
+// type MyListProps = {
+//   films: Film[];
+// }
 
-function MyListScreen(props: MyListProps): JSX.Element {
-  const { films } = props;
+function MyListScreen(): JSX.Element {//props: MyListProps
+  // const { films } = props;
+
+  const films: Film[] = useAppSelector((state) => state.films);
+
   return (
     <div className="user-page">
       <Helmet>

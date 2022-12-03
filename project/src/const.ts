@@ -29,3 +29,7 @@ export enum ScreenTab {
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 
 export const MAX_COUNT = 8;
+
+export const MIN_COMMENT_LENGTH = 50;
+
+export const MAX_COMMENT_LENGTH = 400;
