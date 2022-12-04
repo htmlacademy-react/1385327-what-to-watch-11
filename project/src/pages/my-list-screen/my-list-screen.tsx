@@ -5,17 +5,13 @@ import Copyright from '../../components/copyright/copyright';
 import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/types';
+import { getFilms } from '../../store/films-process/selector';
 
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 
-// type MyListProps = {
-//   films: Film[];
-// }
+function MyListScreen(): JSX.Element {
 
-function MyListScreen(): JSX.Element {//props: MyListProps
-  // const { films } = props;
-
-  const films: Film[] = useAppSelector((state) => state.films);
+  const films: Film[] = useAppSelector(getFilms); //(state) => state.films
 
   return (
     <div className="user-page">

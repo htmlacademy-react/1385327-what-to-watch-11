@@ -1,26 +1,41 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react'; //, useRef
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
-import { AppRoute } from '../../const';
-import { Film } from '../../types/types';
-import { getFormatTime } from '../../utils';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+// import { getFormatTime } from '../../utils';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { getIsCurrentFilmLoading, getCurrentFilm } from '../../store/current-film-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
-// type PlayerScreenProps = {
-//   films: Film[];
-// }
-
-function PlayerScreen(): JSX.Element {//props: PlayerScreenProps
-  // const { films } = props;
+function PlayerScreen(): JSX.Element {
 
   const params = useParams();
   const navigate = useNavigate();
-  const films: Film[] = useAppSelector((state) => state.films);
-  const film = films.find((elem: Film) => elem.id.toString() === params.id);
-  if (film === undefined) {
+  const dispatch = useAppDispatch();
+  // const videoElement = useRef<HTMLVideoElement | null>(null);
+
+  // const films: Film[] = useAppSelector((state) => state.films);
+  // const film = films.find((elem: Film) => elem.id.toString() === params.id);
+
+  const film = useAppSelector(getCurrentFilm);
+  const isLoading = useAppSelector(getIsCurrentFilmLoading);
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchCurrentFilmAction(params.id));
+    }
+  }, [dispatch, params.id]);
+
+  if (!film && !isLoading) {
     return <NoFoundScreen />;
   }
+
+  const handleExitButtonClick = () => {
+    if (film) {
+      navigate(`/films/${film.id}`);
+    }
+  };
 
   return (
     <div className="player">
@@ -29,7 +44,7 @@ function PlayerScreen(): JSX.Element {//props: PlayerScreenProps
       </Helmet>
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit" onClick={() => navigate(AppRoute.Root)}>Exit</button>
+      <button type="button" className="player__exit" onClick={handleExitButtonClick}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -37,7 +52,7 @@ function PlayerScreen(): JSX.Element {//props: PlayerScreenProps
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">{getFormatTime(film.runTime)}</div>
+          <div className="player__time-value">100500</div>
         </div>
 
         <div className="player__controls-row">
@@ -47,7 +62,7 @@ function PlayerScreen(): JSX.Element {//props: PlayerScreenProps
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">{film.name}</div>
+          <div className="player__name">{film?.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">

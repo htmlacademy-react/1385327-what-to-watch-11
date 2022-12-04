@@ -1,31 +1,38 @@
 import { Helmet } from 'react-helmet-async';
-// import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 
-// import { Film } from '../../types/types';
+import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
-// type AddReviewScreenProps = {
-//   films: Film[];
-// }
+function AddReviewScreen(): JSX.Element {
 
-function AddReviewScreen(): JSX.Element {//props: AddReviewScreenProps
-  // const { films } = props;
-  const film = useAppSelector((state) => state.film);
+  const params = useParams();
+  const dispatch = useAppDispatch();
 
-  // const params = useParams();
   // const film = films.find((item: Film) => item.id.toString() === params.id);
+  const film = useAppSelector(getCurrentFilm);//(state) => state.film
+  const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
 
-  if (film === undefined) {
-    return <NoFoundScreen />;
+  useEffect(() => {
+    if (params.id && film?.id.toString() !== params.id) {
+      dispatch(fetchCurrentFilmAction(params.id));
+    }
+  }, [dispatch, film?.id, params.id]);
+
+  if(isCurrentFilmLoading && film?.id.toString() !== params.id){
+    return <LoadingScreen />;
   }
 
-  return (
+  return film ? (
     <section className="film-card film-card--full" style={{background: `${film.backgroundColor}`}}>
       <Helmet>
         <title>WTW. Review</title>
@@ -62,7 +69,7 @@ function AddReviewScreen(): JSX.Element {//props: AddReviewScreenProps
       </div>
 
     </section>
-  );
+  ) : <NoFoundScreen />;
 }
 
 export default AddReviewScreen;

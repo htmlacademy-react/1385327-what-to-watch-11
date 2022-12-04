@@ -26,9 +26,23 @@ export enum ScreenTab {
   Details,
   Reviews
 }
+
+export enum NameSpace {
+  User = 'USER',
+  Films = 'FILMS',
+  PromoFilm = 'PROMOFILM',
+  CurrentFilm = 'CURRENTFILM',
+  SimilarFilms = 'SIMILARFILMS',
+  Reviews = 'REVIEWS',
+}
+
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 
+export const MAX_GENRE_FILTER = 9;
+
 export const MAX_COUNT = 8;
+
+export const SIMILAR_COUNT = 4;
 
 export const MIN_COMMENT_LENGTH = 50;
 

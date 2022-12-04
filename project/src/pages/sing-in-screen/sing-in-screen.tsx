@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { AuthData } from '../../types/types';
 import { loginAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selector';
 
 import Logo from '../../components/logo/logo';
 import Copyright from '../../components/copyright/copyright';
@@ -17,7 +18,7 @@ function SingInScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus); //(state) => state.authorizationStatus
 
   const valid = '[A-Za-z]+[0-9]|[0-9]+[A-Za-z]';
 

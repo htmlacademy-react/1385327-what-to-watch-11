@@ -2,9 +2,13 @@ import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchFilm, fetchReviews, fetchSimilarFilms } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { getCurrentFilm } from '../../store/current-film-process/selector';
+import { getSimilarFilms } from '../../store/similar-films-process/selector';
+import { getReviews } from '../../store/reviews-process/selector';
+import { getIsAuthorized } from '../../store/user-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -21,19 +25,16 @@ function FilmScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const film = useAppSelector((state) => state.film);//: Film | null
-  const reviews = useAppSelector((state) => state.reviews);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  // const isFilmLoading = useAppSelector((state) => state.isFilmLoading);
-  // const filteredFilms = films.filter((item) => item.genre === film.genre && item.id !== film.id);
-  // const error = useAppSelector((state) => state.error);
+  const film = useAppSelector(getCurrentFilm);
+  const reviews = useAppSelector(getReviews);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   useEffect(() => {
     if (params.id) {
-      dispatch(fetchFilm(params.id));
-      dispatch(fetchSimilarFilms(params.id));
-      dispatch(fetchReviews(params.id));
+      dispatch(fetchCurrentFilmAction(params.id));
+      dispatch(fetchSimilarFilmsAction(params.id));
+      dispatch(fetchReviewsAction(params.id));
     }
   }, [params.id, dispatch,]);
 
@@ -41,13 +42,7 @@ function FilmScreen(): JSX.Element {
     window.scrollTo(0, 0);
   }, [params.id]);
 
-  // const film = films.find((item: Film) => item.id.toString() === params.id);
-
-  if (!film.id) {
-    return <NoFoundScreen />;
-  }
-
-  return (
+  return film ? (
     <>
       <Helmet>
         <title>WTW. Film-page</title>
@@ -88,7 +83,7 @@ function FilmScreen(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`${AppRoute.Film}/${film.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>}
+                {isAuthorized && <Link to={`${AppRoute.Film}/${film.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -100,7 +95,7 @@ function FilmScreen(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={similarFilms.slice(0, 4)}/>
+          <FilmsList films={similarFilms}/>
         </section>
 
         <footer className="page-footer">
@@ -109,6 +104,6 @@ function FilmScreen(): JSX.Element {
         </footer>
       </div>
     </>
-  );
+  ) : <NoFoundScreen />;
 }
-export default FilmScreen;
+export default FilmScreen; //similarFilms.slice(0, 4)
