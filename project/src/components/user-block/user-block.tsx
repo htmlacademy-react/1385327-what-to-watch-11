@@ -9,7 +9,7 @@ function UserBlock(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);//(state) => state.authorizationStatus
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (

@@ -12,7 +12,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Promo = '/promo',
-  Review = '/comments'
+  Review = '/comments',
+  Favorites = '/favorite',
 }
 
 export enum AuthorizationStatus {
@@ -34,6 +35,7 @@ export enum NameSpace {
   CurrentFilm = 'CURRENTFILM',
   SimilarFilms = 'SIMILARFILMS',
   Reviews = 'REVIEWS',
+  FavoritesFilms = 'FAVORITESFILMS',
 }
 
 export const DEFAULT_GENRE_FILTER = 'All Genres';

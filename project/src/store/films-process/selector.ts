@@ -1,4 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit';
 import { Film } from '../../types/types';
 import { State } from '../../types/state';
 import { DEFAULT_GENRE_FILTER, MAX_GENRE_FILTER, NameSpace } from '../../const';
@@ -9,13 +8,4 @@ export const getCurrentGenre = (state: State): string => state[NameSpace.Films].
 export const getIsFilmsLoading = (state: State): boolean => state[NameSpace.Films].isLoading;
 export const getFilmsOpened = (state: State): number => state[NameSpace.Films].filmsOpen;
 
-export const getFilteredFilms = createSelector(
-  [getFilms, getCurrentGenre],
-  (films, genre) => {
-    if (genre === DEFAULT_GENRE_FILTER) {
-      return films;
-    }
-
-    return films.filter((film) => film.genre === genre);
-  }
-);
+export const getFavoritesFilms = (state: State): number => state[NameSpace.Films].films.filter((film) => film.isFavorite === true).length;

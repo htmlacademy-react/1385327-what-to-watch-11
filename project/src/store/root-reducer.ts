@@ -7,6 +7,7 @@ import { promoFilmProcess } from './promo-film-process/promo-film-process';
 import { currentFilmProcess } from './current-film-process/current-film-process';
 import { similarFilmsProcess } from './similar-films-process/similar-film-process';
 import { reviewsProcess } from './reviews-process/reviews-process';
+import { favoritesFilmsProcess } from './favorites-films-process/favorites-films-process';
 
 export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   [NameSpace.CurrentFilm]: currentFilmProcess.reducer,
   [NameSpace.SimilarFilms]: similarFilmsProcess.reducer,
   [NameSpace.Reviews]: reviewsProcess.reducer,
+  [NameSpace.FavoritesFilms]: favoritesFilmsProcess.reducer,
 });

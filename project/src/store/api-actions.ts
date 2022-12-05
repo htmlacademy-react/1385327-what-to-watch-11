@@ -63,6 +63,24 @@ export const postNewReview = createAsyncThunk<void, [number, NewReview], {
   }
 );
 
+export const fetchFavoritesAction = createAsyncThunk<Film[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetch/favorites',
+  async (_arg, {dispatch, extra: api}) => (await api.get<Film[]>(APIRoute.Favorites)).data,
+);
+
+export const postFavoriteStatusAction = createAsyncThunk<Film, { filmId: number; status: number }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/post/favorites/status',
+  async ({filmId, status}, { extra: api }) => (await api.post<Film>(`${APIRoute.Favorites}/${filmId}/${status}`)).data,
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;

@@ -18,8 +18,7 @@ function AddReviewScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  // const film = films.find((item: Film) => item.id.toString() === params.id);
-  const film = useAppSelector(getCurrentFilm);//(state) => state.film
+  const film = useAppSelector(getCurrentFilm);
   const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
 
   useEffect(() => {

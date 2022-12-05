@@ -9,6 +9,7 @@ type AddReviewFormPropsType = {
 }
 
 function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

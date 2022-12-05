@@ -8,7 +8,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 
 import Logo from '../../components/logo/logo';
-import Copyright from '../../components/copyright/copyright';
+import Footer from '../../components/footer/footer';
 
 function SingInScreen(): JSX.Element {
 
@@ -18,7 +18,7 @@ function SingInScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus); //(state) => state.authorizationStatus
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const valid = '[A-Za-z]+[0-9]|[0-9]+[A-Za-z]';
 
@@ -74,10 +74,7 @@ function SingInScreen(): JSX.Element {
         </form>
       </div>
 
-      <footer className="page-footer">
-        <Logo light />
-        <Copyright />
-      </footer>
+      <Footer />
     </div>
   );
 }

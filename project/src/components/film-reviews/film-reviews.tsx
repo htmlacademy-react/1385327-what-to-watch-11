@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { fetchReviewsAction } from '../../store/api-actions';
+import { getReviews, getIsReviewsLoading } from '../../store/reviews-process/selector';
+
+import LoadingScreen from '../loading-screen/loading-screen';
 import { Review } from '../../types/types';
 
-type FilmReviewsProps = {
-  reviews: Review[];
-}
 
 const getReview = (review: Review): JSX.Element => (
   <div className="review" key={review.id}>
@@ -18,8 +23,27 @@ const getReview = (review: Review): JSX.Element => (
 );
 
 
-function FilmReviews(props: FilmReviewsProps): JSX.Element { //Возвращает список комментариев для фильма с идентификатором filmId...
-  const { reviews } = props;
+function FilmReviews(): JSX.Element {
+
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const reviews = useAppSelector(getReviews);
+  const isReviewsLoading = useAppSelector(getIsReviewsLoading);
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchReviewsAction(params.id));
+    }
+  }, [dispatch, params.id]);
+
+  if(isReviewsLoading) {
+    return (
+      <div className="film-card__reviews film-card__row">
+        <LoadingScreen />
+      </div>
+    );
+  }
+
   const reviewsArray = Object.values(reviews);
 
   return (

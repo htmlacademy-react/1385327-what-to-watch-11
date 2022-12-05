@@ -38,4 +38,7 @@ export type ReviewsState = {
   isLoading: boolean;
 };
 
-
+export type FavoritesFilmsState = {
+  films: Film[];
+  isLoading: boolean;
+};

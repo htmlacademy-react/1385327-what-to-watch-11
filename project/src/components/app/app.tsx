@@ -3,14 +3,13 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
-import LoadingScreen from '../loading-screen/loading-screen';
 
-import { getIsFilmsLoading } from '../../store/films-process/selector';
-import { getAuthorizationStatus } from '../../store/user-process/selector';
+
+import { store } from '../../store';
+import { fetchFilmsAction, fetchPromoFilmAction } from '../../store/api-actions';
 
 import browserHistory from '../../browser-history';
-import { useAppSelector } from '../../hooks';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
@@ -22,14 +21,8 @@ import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
 function App(): JSX.Element {
 
-  const isLoading = useAppSelector(getIsFilmsLoading); //(state) => state.isFilmsLoading
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);//(state) => state.authorizationStatus
-
-  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
-    return(
-      <LoadingScreen />
-    );
-  }
+  store.dispatch(fetchFilmsAction());
+  store.dispatch(fetchPromoFilmAction());
 
   return (
     <HelmetProvider>
@@ -42,7 +35,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute>
                 <MyListScreen />
               </PrivateRoute>
             }
@@ -50,7 +43,7 @@ function App(): JSX.Element {
           <Route
             path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute>
                 <AddReviewScreen />
               </PrivateRoute>
             }

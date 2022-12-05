@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { useEffect } from 'react'; //, useRef
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-// import { getFormatTime } from '../../utils';
+
 import { fetchCurrentFilmAction } from '../../store/api-actions';
 import { getIsCurrentFilmLoading, getCurrentFilm } from '../../store/current-film-process/selector';
 
@@ -14,9 +14,6 @@ function PlayerScreen(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // const videoElement = useRef<HTMLVideoElement | null>(null);
-
-  // const films: Film[] = useAppSelector((state) => state.films);
-  // const film = films.find((elem: Film) => elem.id.toString() === params.id);
 
   const film = useAppSelector(getCurrentFilm);
   const isLoading = useAppSelector(getIsCurrentFilmLoading);
