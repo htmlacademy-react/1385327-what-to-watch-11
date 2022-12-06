@@ -1,42 +1,36 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { changeFilter, resetFilmsList } from '../../store/action';
 
-import { Film } from '../../types/types';
+import { genreSet, resetFilmsList, genreReset } from '../../store/films-process/films-process';
+import { getCurrentGenre, getGenres } from '../../store/films-process/selector';
+
 import { DEFAULT_GENRE_FILTER } from '../../const';
 
-type GenresListProps = {
-  films: Film[];
-}
+export default function GenresList(): JSX.Element {
 
-const getGenreList = (films: Film[]) => [DEFAULT_GENRE_FILTER, ...new Set(films.map((film) => film.genre))];
+  const genres = useAppSelector(getGenres);
+  const currentGenre = useAppSelector(getCurrentGenre);
 
-function GenresList(props: GenresListProps): JSX.Element {
-  const { films } = props;
-
-  const selectedGenre = useAppSelector((state) => state.genreFilter);
   const dispatch = useAppDispatch();
+  useEffect(() => { dispatch(resetFilmsList()); }, [dispatch, currentGenre]);
+
+  const getListItem = (genreName: string, active: boolean) => (
+    <li key={`genre-${genreName}`}className={active ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}>
+      <a href="/#" className="catalog__genres-link"
+        onClick={
+          (event) => {
+            event.preventDefault();
+            genreName === DEFAULT_GENRE_FILTER ? dispatch(genreReset()) : dispatch(genreSet(genreName));
+          }
+        }
+      >{genreName}
+      </a>
+    </li>
+  );
 
   return (
     <ul className="catalog__genres-list">
-      {getGenreList(films).map((genre) =>(
-        <li className={`catalog__genres-item  ${genre === selectedGenre ? 'catalog__genres-item--active' : ''}`} key={genre}>
-          <Link to='/'
-            className="catalog__genres-link"
-            onClick={
-              (evt) => {
-                evt.preventDefault();
-                dispatch(changeFilter(genre));
-                dispatch(resetFilmsList());
-              }
-            }
-          >
-            {genre}
-          </Link>
-        </li>
-      ))}
+      { genres.map((genre) => getListItem(genre, (genre === currentGenre))) }
     </ul>
   );
 }
-
-export default GenresList;

@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { resetFilmsList } from '../../store/action';
+
+import { resetFilmsList } from '../../store/films-process/films-process';
 
 import { Film } from '../../types/types';
 import VideoPlayer from '../video-player/video-player';

@@ -1,33 +1,47 @@
-import { useState, SyntheticEvent } from 'react';
-
-import { NewReview } from '../../types/types';
+import { useState, SyntheticEvent, FormEvent } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { postNewReview } from '../../store/api-actions';
+import { useNavigate } from 'react-router-dom';
+import { APIRoute, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 
 type AddReviewFormPropsType = {
-  reviewedMovieId: number;
+  filmId: number;
 }
 
-function ReviewForm({reviewedMovieId}: AddReviewFormPropsType): JSX.Element {
+function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
 
-  const formData: NewReview = {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    rating: 0,
     comment: '',
-    rating: null
-  };
-
-  const [formState, setFormState] = useState(formData);
+    isFormDisabled: false,
+  });
 
   const handleFormChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLTextAreaElement | HTMLInputElement;
 
     if (target.name === 'review-text') {
-      setFormState({...formState, comment: target.value});
+      setFormData({...formData, comment: target.value});
     }
     if (target.name === 'rating') {
-      setFormState({...formState, rating: parseInt(target.value, 10)});
+      setFormData({...formData, rating: parseInt(target.value, 10)});
+    }
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (formData.rating && formData.comment) {
+      const [comment, rating] = [formData.comment, formData.rating];
+      dispatch(postNewReview([filmId, {comment, rating}]));
+      navigate(`${APIRoute.Films}/${filmId.toString()}`);
     }
   };
 
   return (
-    <form action="#" className="add-review__form" onChange={handleFormChange}>
+    <form action="#" className="add-review__form" onChange={handleFormChange} onSubmit={handleFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           <input className="rating__input" id="star-10" type="radio" name="rating" value="10" />
@@ -65,7 +79,7 @@ function ReviewForm({reviewedMovieId}: AddReviewFormPropsType): JSX.Element {
       <div className="add-review__text" style={{background: '#FFFFFF', opacity: '50%'}}>
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={formData.isFormDisabled || !(formData.comment.length > MIN_COMMENT_LENGTH && formData.comment.length < MAX_COMMENT_LENGTH && formData.rating !== 0)}>Post</button>
         </div>
 
       </div>

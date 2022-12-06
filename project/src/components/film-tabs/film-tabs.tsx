@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Film, Review } from '../../types/types';
+import { Film } from '../../types/types'; //, Review
 import { ScreenTab } from '../../const';
 
 import FilmOverview from '../film-overview/film-overview';
@@ -10,11 +10,10 @@ import FilmReviews from '../film-reviews/film-reviews';
 
 type FilmCardProps = {
   film: Film;
-  reviews: Review[];
 }
 
 function FilmTabs(props: FilmCardProps): JSX.Element {
-  const { film, reviews} = props;
+  const { film} = props;
 
   const [activeTab, setActiveTab] = useState<number>(ScreenTab.Overview);
 
@@ -25,7 +24,7 @@ function FilmTabs(props: FilmCardProps): JSX.Element {
       case ScreenTab.Details:
         return <FilmDetails film={film} />;
       case ScreenTab.Reviews:
-        return <FilmReviews reviews={reviews} />;
+        return <FilmReviews />;
     }
   };
 

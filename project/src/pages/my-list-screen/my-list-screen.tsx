@@ -1,19 +1,29 @@
 import { Helmet } from 'react-helmet-async';
-
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import Logo from '../../components/logo/logo';
-import Copyright from '../../components/copyright/copyright';
+import Footer from '../../components/footer/footer';
+import { fetchFavoritesAction } from '../../store/api-actions';
+
 import UserBlock from '../../components/user-block/user-block';
 
-import { Film } from '../../types/types';
+import { getFavoritesFilms, getIsFavoriteFilmsLoading } from '../../store/favorites-films-process/selector';
 
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmsList from '../../components/films-list/films-list';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
-type MyListProps = {
-  films: Film[];
-}
+function MyListScreen(): JSX.Element {
 
-function MyListScreen(props: MyListProps): JSX.Element {
-  const { films } = props;
+  const myFilms = useAppSelector(getFavoritesFilms);
+  const isFavoriteFilmsLoading = useAppSelector(getIsFavoriteFilmsLoading);
+  const dispatch = useAppDispatch();
+
+  useEffect(
+    () => {
+      dispatch(fetchFavoritesAction());
+    }, [dispatch]
+  );
+
   return (
     <div className="user-page">
       <Helmet>
@@ -22,22 +32,16 @@ function MyListScreen(props: MyListProps): JSX.Element {
 
       <header className="page-header user-page__head">
         <Logo />
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myFilms.length}</span></h1>
         <UserBlock />
       </header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-        <div className="catalog__films-list">
-          {films.map((film) => <SmallFilmCard key={`${film.id}`} film={film} />)}
-        </div>
+        { isFavoriteFilmsLoading ? <LoadingScreen/> : <FilmsList films={myFilms} />}
       </section>
 
-      <footer className="page-footer">
-        <Logo light />
-        <Copyright />
-      </footer>
+      <Footer />
     </div>
   );
 }

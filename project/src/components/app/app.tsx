@@ -1,14 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { useAppSelector } from '../../hooks';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { Film, Review } from '../../types/types';
-
 import PrivateRoute from '../private-route/private-route';
-
 import HistoryRouter from '../history-route/history-route';
+
+
+import { store } from '../../store';
+import { fetchFilmsAction, fetchPromoFilmAction } from '../../store/api-actions';
+
 import browserHistory from '../../browser-history';
+import { AppRoute } from '../../const';
 
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
@@ -16,28 +17,12 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
-import LoadingScreen from '../loading-screen/loading-screen';
 import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 
-type AppScreenProps = {
-  reviews: Review[];
-  mainFilm: Film;
-}
+function App(): JSX.Element {
 
-function App(props: AppScreenProps): JSX.Element {
-
-  const { reviews, mainFilm } = props;
-
-  const films = useAppSelector((state) => state.films);
-
-  const isLoading = useAppSelector((state) => state.isFilmsLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
-  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
-    return(
-      <LoadingScreen/>
-    );
-  }
+  store.dispatch(fetchFilmsAction());
+  store.dispatch(fetchPromoFilmAction());
 
   return (
     <HelmetProvider>
@@ -45,35 +30,31 @@ function App(props: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={
-              <MainScreen mainFilm={mainFilm} />
-            }
+            element={<MainScreen />}
           />
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
-                <MyListScreen films={films} />
+              <PrivateRoute>
+                <MyListScreen />
               </PrivateRoute>
             }
           />
           <Route
             path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
-                <AddReviewScreen films={films} />
+              <PrivateRoute>
+                <AddReviewScreen />
               </PrivateRoute>
             }
           />
           <Route
             path={`${AppRoute.Player}/:id`}
-            element={<PlayerScreen films={films} />}
+            element={<PlayerScreen />}
           />
           <Route
             path={`${AppRoute.Film}/:id`}
-            element={
-              <FilmScreen films={films} reviews={reviews} />
-            }
+            element={<FilmScreen />}
           />
           <Route
             path={AppRoute.SignIn}
