@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { DEFAULT_GENRE_FILTER } from '../../const';
+// import { DEFAULT_GENRE_FILTER } from '../../const';
 
 import { createFilmsList } from '../../store/films-process/films-process';
-import { getFilms, getCurrentGenre, getFilmsOpened, getIsFilmsLoading } from '../../store/films-process/selector';
+import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';//getFilms, getCurrentGenre,
 import { getPromoFilm } from '../../store/promo-film-process/selector';
 
 import GenresList from '../../components/genres-list/genres-list';
@@ -20,19 +20,20 @@ function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const genreFilter = useAppSelector(getCurrentGenre);
-  const films = useAppSelector(getFilms);
+  // const genreFilter = useAppSelector(getCurrentGenre);
+  // const films = useAppSelector(getFilms);
+  const films = useAppSelector(getFilteredFilms);
   const isFilmsLoading = useAppSelector(getIsFilmsLoading);
   const promoFilm = useAppSelector(getPromoFilm);
   const filmsCount = useAppSelector(getFilmsOpened);
 
   if(!promoFilm){
-    return (<div>{false}</div>);
+    return (<div></div>);
   }
 
-  const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
-    ? films
-    : films.filter((film) => film.genre === genreFilter);
+  // const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
+  //   ? films
+  //   : films.filter((film) => film.genre === genreFilter);
 
   const handleShowMoreButtonClick = () => {
     dispatch(createFilmsList());
@@ -79,8 +80,8 @@ function MainScreen(): JSX.Element {
 
           <GenresList />
 
-          { isFilmsLoading ? <LoadingScreen/> : <FilmsList films={filteredFilms.slice(0, filmsCount)}/>}
-          {((filteredFilms.length - filmsCount) > 0 ) && <ShowMore onClick={handleShowMoreButtonClick}/>}
+          {isFilmsLoading ? <LoadingScreen/> : <FilmsList films={films.slice(0, filmsCount)}/>}
+          {((films.length - filmsCount) > 0 ) && <ShowMore onClick={handleShowMoreButtonClick}/>}
         </section>
 
         <Footer />

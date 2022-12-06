@@ -1,7 +1,7 @@
 function LoadingScreen(): JSX.Element {
   return (
-    <div style={{textAlign: 'center'}}>
-      <p>Loading ...</p>
+    <div>
+      <p className="loading">Loading ...</p>
     </div>
   );
 }

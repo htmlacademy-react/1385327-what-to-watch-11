@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 
 import Logo from '../../components/logo/logo';
 
+import './no-found-screen.css';
+
 function NotFoundScreen(): JSX.Element {
   return (
     <div className="user-page">
@@ -12,9 +14,9 @@ function NotFoundScreen(): JSX.Element {
       <header className="page-header user-page__head">
         <Logo />
       </header>
-      <main style={{ display: 'flex', flexDirection: 'column' }}>
-        <h1 className="page-title" style={{ marginBottom: '10px' }}>404. Page not found</h1>
-        <Link to="/" style={{ textAlign: 'center', color: '#dfcf77' }}>Back to the main page</Link>
+      <main>
+        <h1 className="page-title">404. Page not found</h1>
+        <Link className="link" to="/">Back to the main page</Link>
       </main>
     </div>
   );
