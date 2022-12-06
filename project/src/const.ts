@@ -49,3 +49,9 @@ export const SIMILAR_COUNT = 4;
 export const MIN_COMMENT_LENGTH = 50;
 
 export const MAX_COMMENT_LENGTH = 400;
+
+export enum TimeValue {
+  PreviewStartTimeout = 1000,
+  DefaultSecondsCount = 60,
+  Hundred = 100
+}
