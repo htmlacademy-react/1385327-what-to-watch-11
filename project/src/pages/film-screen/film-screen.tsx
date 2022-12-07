@@ -81,7 +81,7 @@ function FilmScreen(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          { isSimilarFilmsLoading ? <LoadingScreen/> : <FilmsList films={similarFilms}/>}
+          {isSimilarFilmsLoading ? <LoadingScreen/> : <FilmsList films={similarFilms}/>}
         </section>
 
         <Footer />
@@ -89,4 +89,4 @@ function FilmScreen(): JSX.Element {
     </>
   ) : <NoFoundScreen />;
 }
-export default FilmScreen;
+export default FilmScreen;//isFavorite={film.isFavorite}

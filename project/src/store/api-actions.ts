@@ -52,7 +52,7 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
   async (filmId, {dispatch, extra: api}) => (await api.get<Review[]>(`${APIRoute.Review}/${filmId}`)).data,
 );
 
-export const postNewReview = createAsyncThunk<void, [number, NewReview], {
+export const postNewReviewAction = createAsyncThunk<void, [number, NewReview], {
     dispatch: AppDispatch;
     stat: State;
     extra: AxiosInstance;
@@ -78,7 +78,7 @@ export const postFavoriteStatusAction = createAsyncThunk<Film, { filmId: number;
   extra: AxiosInstance;
 }>(
   'data/post/favorites/status',
-  async ({filmId, status}, { extra: api }) => (await api.post<Film>(`${APIRoute.Favorites}/${filmId}/${status}`)).data,
+  async ({filmId, status}, { dispatch, extra: api }) => (await api.post<Film>(`${APIRoute.Favorites}/${filmId}/${status}`)).data,
 );
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {

@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-// import { DEFAULT_GENRE_FILTER } from '../../const';
 
 import { createFilmsList } from '../../store/films-process/films-process';
-import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';//getFilms, getCurrentGenre,
+import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';
 import { getPromoFilm } from '../../store/promo-film-process/selector';
 
 import GenresList from '../../components/genres-list/genres-list';
@@ -20,8 +19,6 @@ function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  // const genreFilter = useAppSelector(getCurrentGenre);
-  // const films = useAppSelector(getFilms);
   const films = useAppSelector(getFilteredFilms);
   const isFilmsLoading = useAppSelector(getIsFilmsLoading);
   const promoFilm = useAppSelector(getPromoFilm);
@@ -30,10 +27,6 @@ function MainScreen(): JSX.Element {
   if(!promoFilm){
     return (<div></div>);
   }
-
-  // const filteredFilms = genreFilter === DEFAULT_GENRE_FILTER
-  //   ? films
-  //   : films.filter((film) => film.genre === genreFilter);
 
   const handleShowMoreButtonClick = () => {
     dispatch(createFilmsList());
@@ -90,4 +83,4 @@ function MainScreen(): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default MainScreen;//isFavorite={promoFilm.isFavorite}
