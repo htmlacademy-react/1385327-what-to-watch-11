@@ -1,6 +1,6 @@
 import { useState, SyntheticEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { postNewReview } from '../../store/api-actions';
+import { postNewReviewAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router-dom';
 import { APIRoute, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 
@@ -35,7 +35,7 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
 
     if (formData.rating && formData.comment) {
       const [comment, rating] = [formData.comment, formData.rating];
-      dispatch(postNewReview([filmId, {comment, rating}]));
+      dispatch(postNewReviewAction([filmId, {comment, rating}]));
       navigate(`${APIRoute.Films}/${filmId.toString()}`);
     }
   };

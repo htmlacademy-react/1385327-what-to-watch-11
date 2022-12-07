@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Film } from '../../types/types'; //, Review
+import { Film } from '../../types/types';
 import { ScreenTab } from '../../const';
 
 import FilmOverview from '../film-overview/film-overview';
@@ -28,6 +28,10 @@ function FilmTabs(props: FilmCardProps): JSX.Element {
     }
   };
 
+  const handleLinkClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+  };
+
   return (
     <div className="film-card__wrap film-card__translate-top">
       <div className="film-card__info">
@@ -40,14 +44,14 @@ function FilmTabs(props: FilmCardProps): JSX.Element {
           <nav className="film-nav film-card__nav">
             <ul className="film-nav__list">
 
-              <li className={`film-nav__item ${activeTab === 0 ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(0)}>
-                <Link to='#' className="film-nav__link">Overview</Link>
+              <li className={`film-nav__item ${activeTab === ScreenTab.Overview ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(ScreenTab.Overview)}>
+                <Link to='#' className="film-nav__link" onClick={handleLinkClick}>Overview</Link>
               </li>
-              <li className={`film-nav__item ${activeTab === 1 ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(1)}>
-                <Link to='#' className="film-nav__link">Details</Link>
+              <li className={`film-nav__item ${activeTab === ScreenTab.Details ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(ScreenTab.Details)}>
+                <Link to='#' className="film-nav__link" onClick={handleLinkClick}>Details</Link>
               </li>
-              <li className={`film-nav__item ${activeTab === 2 ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(2)}>
-                <Link to='#' className="film-nav__link">Reviews</Link>
+              <li className={`film-nav__item ${activeTab === ScreenTab.Reviews ? 'film-nav__item--active' : ''}`} onClick={() => setActiveTab(ScreenTab.Reviews)}>
+                <Link to='#' className="film-nav__link" onClick={handleLinkClick}>Reviews</Link>
               </li>
 
             </ul>
