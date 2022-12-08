@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FilmsState } from '../../types/state';
 import { DEFAULT_GENRE_FILTER, MAX_COUNT, NameSpace } from '../../const';
-import { fetchFilmsAction, postFavoriteStatusAction } from '../api-actions';
+import { fetchFilmsAction } from '../api-actions'; //, postFavoriteStatusAction
 
 
 const initialState: FilmsState = {
@@ -39,13 +39,13 @@ export const filmsProcess = createSlice({
       })
       .addCase(fetchFilmsAction.rejected, (state) => {
         state.isLoading = false;
-      })
-      .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
-        const filmIndex = state.films.findIndex((film) => film.id === action.payload.id);
-        if(filmIndex !== -1){
-          state.films[filmIndex].isFavorite = action.payload.isFavorite;
-        }
       });
+    // .addCase(postFavoriteStatusAction.fulfilled, (state, action) => {
+    //   const filmIndex = state.films.findIndex((film) => film.id === action.payload.id);
+    //   if(filmIndex !== -1){
+    //     state.films[filmIndex].isFavorite = action.payload.isFavorite;
+    //   }
+    // });
   }
 });
 

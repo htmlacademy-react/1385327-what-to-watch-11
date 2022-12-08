@@ -13,7 +13,7 @@ export const getFilmsOpened = (state: State): number => state[NameSpace.Films].f
 export const getGenres = (state: State): string[] => [DEFAULT_GENRE_FILTER, ...new Set(state[NameSpace.Films].films.map((film) => film.genre))].slice(0, MAX_GENRE_FILTER);
 export const getCurrentGenre = (state: State): string => state[NameSpace.Films].currentGenre;
 
-export const getCountFavoritesFilms = (state: State): number => state[NameSpace.Films].films.filter((film) => film.isFavorite === true).length;
+// export const getCountFavoritesFilms = (state: State): number => state[NameSpace.Films].films.filter((film) => film.isFavorite === true).length;
 
 export const getFilteredFilms = createSelector(
   [getFilms, getCurrentGenre],

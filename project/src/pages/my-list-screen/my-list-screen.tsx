@@ -1,16 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import Logo from '../../components/logo/logo';
-import Footer from '../../components/footer/footer';
+
 import { fetchFavoritesAction } from '../../store/api-actions';
-
-import UserBlock from '../../components/user-block/user-block';
-
 import { getFavoritesFilms, getIsFavoriteFilmsLoading } from '../../store/favorites-films-process/selector';
 
+import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import UserBlock from '../../components/user-block/user-block';
 
 function MyListScreen(): JSX.Element {
 
@@ -38,7 +37,7 @@ function MyListScreen(): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        { isFavoriteFilmsLoading ? <LoadingScreen/> : <FilmsList films={myFilms} />}
+        {isFavoriteFilmsLoading ? <LoadingScreen/> : <FilmsList films={myFilms} />}
       </section>
 
       <Footer />

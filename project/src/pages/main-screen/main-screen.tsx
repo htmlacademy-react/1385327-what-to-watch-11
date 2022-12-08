@@ -1,7 +1,12 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
+import { AuthorizationStatus } from '../../const';
 
+import { fetchPromoFilmAction, fetchFavoritesAction } from '../../store/api-actions';
+// import { getIsAuthorized } from '../../store/user-process/selector';
+import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { createFilmsList } from '../../store/films-process/films-process';
 import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';
 import { getPromoFilm } from '../../store/promo-film-process/selector';
@@ -15,11 +20,23 @@ import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 
+
 function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
   const films = useAppSelector(getFilteredFilms);
+  // const authorizationStatus = useAppSelector(getIsAuthorized);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  useEffect(() => {
+    dispatch(fetchPromoFilmAction());
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [authorizationStatus, dispatch]);
+
+
   const isFilmsLoading = useAppSelector(getIsFilmsLoading);
   const promoFilm = useAppSelector(getPromoFilm);
   const filmsCount = useAppSelector(getFilmsOpened);
@@ -61,7 +78,7 @@ function MainScreen(): JSX.Element {
                 <span className="film-card__genre">{promoFilm.genre}</span>
                 <span className="film-card__year">{promoFilm.released}</span>
               </p>
-              <FilmButtons filmId={promoFilm.id} isFavorite={promoFilm.isFavorite} promo/>
+              <FilmButtons filmId={promoFilm.id} promo/>
             </div>
           </div>
         </div>
@@ -83,4 +100,4 @@ function MainScreen(): JSX.Element {
   );
 }
 
-export default MainScreen;//isFavorite={promoFilm.isFavorite}
+export default MainScreen;

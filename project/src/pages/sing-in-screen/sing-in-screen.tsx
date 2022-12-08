@@ -1,14 +1,26 @@
-import { useRef, FormEvent, useEffect } from 'react';
+import { useRef, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Helmet } from 'react-helmet-async';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
 import { AuthData } from '../../types/types';
+import { AppRoute, AuthorizationStatus, ErrorMessage, EMAIL_PATTERN, PASSWORD_PATTERN } from '../../const';
+
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
+
+function getSignInErrorMessage(inputId: string): string {
+  if (inputId === 'user-email') {
+    return ErrorMessage.InvalidEmail;
+  }
+  if (inputId === 'user-password') {
+    return ErrorMessage.InvalidPassword;
+  }
+  return '';
+}
 
 function SingInScreen(): JSX.Element {
 
@@ -18,9 +30,9 @@ function SingInScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const [errFieldId, setErrFieldId] = useState('');
 
-  const valid = '[A-Za-z]+[0-9]|[0-9]+[A-Za-z]';
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -30,6 +42,16 @@ function SingInScreen(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
+
+      if (!EMAIL_PATTERN.test(loginRef.current?.value)) {
+        setErrFieldId('user-email');
+        return;
+      }
+      if (!PASSWORD_PATTERN.test(passwordRef.current?.value)) {
+        setErrFieldId('user-password');
+        return;
+      }
+
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -58,13 +80,18 @@ function SingInScreen(): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
-          <div className="sign-in__fields">
+
+          <div className="sign-in__message">
+            <p>{getSignInErrorMessage(errFieldId)}</p>
+          </div>
+
+          <div className={`sign-in__field ${errFieldId === 'user-email' ? 'sign-in__field--error' : ''}`}>
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef} required />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" pattern={valid} ref={passwordRef} required />
+            <div className={`sign-in__field ${errFieldId === 'user-password' ? 'sign-in__field--error' : ''}`}>
+              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef} required />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>

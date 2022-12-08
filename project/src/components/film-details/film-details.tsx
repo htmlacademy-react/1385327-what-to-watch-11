@@ -8,7 +8,7 @@ type FilmDetailsProps = {
 function FilmDetails(props: FilmDetailsProps): JSX.Element {
   const { film } = props;
 
-  const actorList = film.starring.join('\n'); // не работает...
+  const actorList = film.starring.join(', \n'); // имена не влезают в строчку-------------------------------------------------------------------
 
   return (
     <div className="film-card__text film-card__row">
@@ -19,7 +19,7 @@ function FilmDetails(props: FilmDetailsProps): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value">{actorList}</span>
+          <span className="film-card__details-value" style={{whiteSpace: 'pre-line'}}>{actorList}</span>
         </p>
       </div>
 

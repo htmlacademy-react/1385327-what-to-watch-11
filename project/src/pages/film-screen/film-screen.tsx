@@ -70,7 +70,7 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <FilmButtons filmId={film.id} isFavorite={film.isFavorite}/>
+              <FilmButtons filmId={film.id} />
             </div>
           </div>
         </div>
@@ -89,4 +89,4 @@ function FilmScreen(): JSX.Element {
     </>
   ) : <NoFoundScreen />;
 }
-export default FilmScreen;//isFavorite={film.isFavorite}
+export default FilmScreen;

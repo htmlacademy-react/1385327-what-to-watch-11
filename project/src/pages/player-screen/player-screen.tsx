@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { TimeValue } from '../../const';
+import { TimeValue, AppRoute } from '../../const';
 
 import { fetchCurrentFilmAction } from '../../store/api-actions';
 import { getIsCurrentFilmLoading, getCurrentFilm } from '../../store/current-film-process/selector';
@@ -14,6 +14,7 @@ function PlayerScreen(): JSX.Element {
 
   const params = useParams();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -155,7 +156,7 @@ function PlayerScreen(): JSX.Element {
 
   const handleExitButtonClick = () => {
     if (film) {
-      navigate(`/films/${film.id}`);
+      navigate(`${AppRoute.Film}/${film.id}`); //(`/films/${film.id}`)
     }
   };
 
