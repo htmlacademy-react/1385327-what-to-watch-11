@@ -57,10 +57,14 @@ export enum TimeValue {
 }
 
 export enum ErrorMessage {
-  InvalidEmailAndPassword = 'We can’t recognize this email and password combination. Please try again.',// но регистрации же нет... убрать эту ошибку?
   InvalidPassword = 'Please enter a valid password',
   InvalidEmail = 'Please enter a valid email',
 }
 
 export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
 export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;
+
+export enum SingInField {
+  UserEmail = 'user-email',
+  UserPassword = 'user-password',
+}

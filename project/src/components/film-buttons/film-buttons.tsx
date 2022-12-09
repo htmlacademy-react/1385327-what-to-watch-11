@@ -26,11 +26,8 @@ export default function FilmButtons(props: FilmButtonsProps): JSX.Element {
     if (!isAuthorized) {
       navigate(AppRoute.SignIn);
       return;
-    } if (!isFavorite) {
-      dispatch(postFavoriteStatusAction([filmId, true]));
-    } else {
-      dispatch(postFavoriteStatusAction([filmId, false]));
     }
+    dispatch(postFavoriteStatusAction([filmId, !isFavorite]));
   };
 
   function getInListButton(): JSX.Element {

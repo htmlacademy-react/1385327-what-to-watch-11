@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AuthorizationStatus } from '../../const';
 
-import { fetchPromoFilmAction, fetchFavoritesAction } from '../../store/api-actions';
+import { fetchPromoFilmAction, fetchFavoritesAction, fetchFilmsAction} from '../../store/api-actions';
 // import { getIsAuthorized } from '../../store/user-process/selector';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { createFilmsList } from '../../store/films-process/films-process';
@@ -31,6 +31,7 @@ function MainScreen(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchPromoFilmAction());
+    dispatch(fetchFilmsAction());
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoritesAction());
     }

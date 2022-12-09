@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AuthData } from '../../types/types';
-import { AppRoute, AuthorizationStatus, ErrorMessage, EMAIL_PATTERN, PASSWORD_PATTERN } from '../../const';
+import { AppRoute, AuthorizationStatus, ErrorMessage, EMAIL_PATTERN, PASSWORD_PATTERN, SingInField } from '../../const';
 
 import { loginAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
@@ -13,10 +13,10 @@ import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 
 function getSignInErrorMessage(inputId: string): string {
-  if (inputId === 'user-email') {
+  if (inputId === SingInField.UserEmail) {
     return ErrorMessage.InvalidEmail;
   }
-  if (inputId === 'user-password') {
+  if (inputId === SingInField.UserPassword) {
     return ErrorMessage.InvalidPassword;
   }
   return '';
@@ -44,11 +44,11 @@ function SingInScreen(): JSX.Element {
     if (loginRef.current !== null && passwordRef.current !== null) {
 
       if (!EMAIL_PATTERN.test(loginRef.current?.value)) {
-        setErrFieldId('user-email');
+        setErrFieldId(SingInField.UserEmail);
         return;
       }
       if (!PASSWORD_PATTERN.test(passwordRef.current?.value)) {
-        setErrFieldId('user-password');
+        setErrFieldId(SingInField.UserPassword);
         return;
       }
 
@@ -85,12 +85,12 @@ function SingInScreen(): JSX.Element {
             <p>{getSignInErrorMessage(errFieldId)}</p>
           </div>
 
-          <div className={`sign-in__field ${errFieldId === 'user-email' ? 'sign-in__field--error' : ''}`}>
+          <div className={`sign-in__field ${errFieldId === SingInField.UserEmail ? 'sign-in__field--error' : ''}`}>
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef} required />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className={`sign-in__field ${errFieldId === 'user-password' ? 'sign-in__field--error' : ''}`}>
+            <div className={`sign-in__field ${errFieldId === SingInField.UserPassword ? 'sign-in__field--error' : ''}`}>
               <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef} required />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

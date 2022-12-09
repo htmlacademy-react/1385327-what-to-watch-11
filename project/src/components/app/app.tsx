@@ -4,8 +4,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 
-import { store } from '../../store';
-import { fetchFilmsAction } from '../../store/api-actions';
+// import { store } from '../../store';
+// import { fetchFilmsAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 
 import { useAppSelector } from '../../hooks';
@@ -24,7 +24,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
 
-  store.dispatch(fetchFilmsAction());
+  // store.dispatch(fetchFilmsAction());
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -45,7 +45,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute >
                 <MyListScreen />
               </PrivateRoute>
             }
@@ -53,7 +53,7 @@ function App(): JSX.Element {
           <Route
             path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute >
                 <AddReviewScreen />
               </PrivateRoute>
             }
@@ -80,4 +80,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default App;//authorizationStatus={authorizationStatus}
