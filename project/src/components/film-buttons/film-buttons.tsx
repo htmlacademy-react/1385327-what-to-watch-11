@@ -1,35 +1,33 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getIsAuthorized } from '../../store/user-process/selector';
-
-import { getCountFavoritesFilms } from '../../store/films-process/selector';
+import { AppRoute } from '../../const';
 
 import { postFavoriteStatusAction } from '../../store/api-actions';
-
-import { AppRoute } from '../../const';
+import { getIsAuthorized } from '../../store/user-process/selector';
+import { getFavoritesFilms } from '../../store/favorites-films-process/selector';
 
 type FilmButtonsProps = {
   filmId: number;
-  isFavorite: boolean;
   promo?: boolean;
 }
 
 export default function FilmButtons(props: FilmButtonsProps): JSX.Element {
-  const {filmId, isFavorite, promo} = props;//
+  const {filmId, promo} = props;
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const isAuthorized = useAppSelector(getIsAuthorized);
-  const favoritesFilmsCount = useAppSelector(getCountFavoritesFilms);
+  const favoriteFilms = useAppSelector(getFavoritesFilms);
 
+  const isFavorite = favoriteFilms.some((film) => film.id === filmId);
 
   const handleClickFavorites = () => {
-    if (isAuthorized) {
-      dispatch(postFavoriteStatusAction({filmId: filmId, status: isFavorite ? 0 : 1}));
-    } else {
+    if (!isAuthorized) {
       navigate(AppRoute.SignIn);
+      return;
     }
+    dispatch(postFavoriteStatusAction([filmId, !isFavorite]));
   };
 
   function getInListButton(): JSX.Element {
@@ -52,6 +50,16 @@ export default function FilmButtons(props: FilmButtonsProps): JSX.Element {
     navigate(`/player/${filmId}`);
   };
 
+  const renderButton = () => {
+    if (!isAuthorized) {
+      return getAddButton();
+    } if (isFavorite) {
+      return getInListButton();
+    } else {
+      return getAddButton();
+    }
+  };
+
   return (
     <div className="film-card__buttons">
 
@@ -63,13 +71,13 @@ export default function FilmButtons(props: FilmButtonsProps): JSX.Element {
       </button>
 
       <button className="btn btn--list film-card__button" type="button" onClick={handleClickFavorites}>
-        {isFavorite ? getInListButton() : getAddButton()}
+        {renderButton()}
         <span>My list</span>
-        {isAuthorized && <span className="film-card__count">{favoritesFilmsCount}</span>}
+        {isAuthorized && <span className="film-card__count">{favoriteFilms.length}</span>}
       </button>
 
       {!promo && isAuthorized && <Link to="review" className="btn film-card__button">Add review</Link>}
 
     </div>
   );
-}
+} // {isFavorite ? getInListButton() : getAddButton()}

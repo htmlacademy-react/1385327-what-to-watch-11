@@ -8,12 +8,14 @@ import { fetchCurrentFilmAction } from '../../store/api-actions';
 import { getIsCurrentFilmLoading, getCurrentFilm } from '../../store/current-film-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+// import LoadingScreen from '../../components/loading-screen/loading-screen';
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
 function PlayerScreen(): JSX.Element {
 
   const params = useParams();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -123,7 +125,7 @@ function PlayerScreen(): JSX.Element {
 
   if (isCurrentFilmLoading) {
     return (
-      <LoadingScreen />
+      <LoadingSpinner />
     );
   }
 
@@ -155,7 +157,7 @@ function PlayerScreen(): JSX.Element {
 
   const handleExitButtonClick = () => {
     if (film) {
-      navigate(`/films/${film.id}`);
+      navigate(-1);
     }
   };
 

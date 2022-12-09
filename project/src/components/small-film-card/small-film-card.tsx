@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
+import { AppRoute } from '../../const';
 
 import { resetFilmsList } from '../../store/films-process/films-process';
 
@@ -15,6 +16,8 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const { film } = props;
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const [activeId, setActiveId] = useState(false);
 
@@ -36,7 +39,7 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   };
 
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={() => navigate(`${AppRoute.Film}/${film.id}`)}>
       <div className="small-film-card__image">
         {
           activeId ?

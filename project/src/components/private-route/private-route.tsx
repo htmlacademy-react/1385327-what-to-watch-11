@@ -4,12 +4,12 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 
 type PrivateRouteProps = {
-
+  // authorizationStatus: AuthorizationStatus;
   children: JSX.Element;
 }
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-  const { children} = props;
+  const {children} = props; //authorizationStatus,
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (

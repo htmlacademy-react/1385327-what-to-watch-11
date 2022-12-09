@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchFavoritesAction } from '../../store/api-actions';//, fetchSimilarFilmsAction
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
-import { getIsSimilarFilmsLoading, getSimilarFilms } from '../../store/similar-films-process/selector';
+// import { getIsSimilarFilmsLoading, getSimilarFilms } from '../../store/similar-films-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -14,8 +14,9 @@ import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import FilmTabs from '../../components/film-tabs/film-tabs';
-import FilmsList from '../../components/films-list/films-list';
+// import FilmsList from '../../components/films-list/films-list';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import MoreLikeThis from '../../components/more-like-this/more-like-this';
 
 function FilmScreen(): JSX.Element {
 
@@ -25,15 +26,20 @@ function FilmScreen(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
   const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
 
-  const similarFilms = useAppSelector(getSimilarFilms);
-  const isSimilarFilmsLoading = useAppSelector(getIsSimilarFilmsLoading);
+  // const similarFilms = useAppSelector(getSimilarFilms);
+  // const isSimilarFilmsLoading = useAppSelector(getIsSimilarFilmsLoading);
 
   useEffect(() => {
     if (params.id && film?.id.toString() !== params.id) {
       dispatch(fetchCurrentFilmAction(params.id));
-      dispatch(fetchSimilarFilmsAction(params.id));
+      // dispatch(fetchSimilarFilmsAction(params.id));
+      // dispatch(fetchFavoritesAction());
     }
   }, [params.id, dispatch, film?.id]);
+
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,7 +76,7 @@ function FilmScreen(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <FilmButtons filmId={film.id} isFavorite={film.isFavorite}/>
+              <FilmButtons filmId={film.id} />
             </div>
           </div>
         </div>
@@ -81,7 +87,7 @@ function FilmScreen(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {isSimilarFilmsLoading ? <LoadingScreen/> : <FilmsList films={similarFilms}/>}
+          <MoreLikeThis currentFilmId={film.id} />
         </section>
 
         <Footer />
@@ -89,4 +95,4 @@ function FilmScreen(): JSX.Element {
     </>
   ) : <NoFoundScreen />;
 }
-export default FilmScreen;//isFavorite={film.isFavorite}
+export default FilmScreen;// {isSimilarFilmsLoading ? <LoadingScreen/> : <FilmsList films={similarFilms}/>}
