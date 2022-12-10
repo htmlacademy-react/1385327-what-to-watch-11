@@ -3,7 +3,6 @@ import { SimilarFilmsState } from '../../types/state';
 import { NameSpace } from '../../const';
 import { fetchSimilarFilmsAction } from '../api-actions';
 
-
 const initialState: SimilarFilmsState = {
   films: [],
   isLoading: true

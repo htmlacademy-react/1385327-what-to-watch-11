@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 
-import { fetchFavoritesAction } from '../../store/api-actions';
-import { getFavoritesFilms, getIsFavoriteFilmsLoading } from '../../store/favorites-films-process/selector';
+import { fetchFavoritesFilmsAction } from '../../store/api-actions';
+import { getFavoritesFilms, getIsFavoritesFilmsLoading } from '../../store/favorites-films-process/selector';
 
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
@@ -14,12 +14,12 @@ import UserBlock from '../../components/user-block/user-block';
 function MyListScreen(): JSX.Element {
 
   const myFilms = useAppSelector(getFavoritesFilms);
-  const isFavoriteFilmsLoading = useAppSelector(getIsFavoriteFilmsLoading);
+  const isFavoriteFilmsLoading = useAppSelector(getIsFavoritesFilmsLoading);
   const dispatch = useAppDispatch();
 
   useEffect(
     () => {
-      dispatch(fetchFavoritesAction());
+      dispatch(fetchFavoritesFilmsAction());
     }, [dispatch]
   );
 

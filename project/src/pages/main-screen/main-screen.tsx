@@ -4,8 +4,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AuthorizationStatus } from '../../const';
 
-import { fetchPromoFilmAction, fetchFavoritesAction, fetchFilmsAction} from '../../store/api-actions';
-// import { getIsAuthorized } from '../../store/user-process/selector';
+import { fetchPromoFilmAction, fetchFavoritesFilmsAction, fetchFilmsAction} from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { createFilmsList } from '../../store/films-process/films-process';
 import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';
@@ -25,22 +24,19 @@ function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const films = useAppSelector(getFilteredFilms);
-  // const authorizationStatus = useAppSelector(getIsAuthorized);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const films = useAppSelector(getFilteredFilms);
+  const isFilmsLoading = useAppSelector(getIsFilmsLoading);
+  const filmsCount = useAppSelector(getFilmsOpened);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   useEffect(() => {
     dispatch(fetchPromoFilmAction());
     dispatch(fetchFilmsAction());
     if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoritesAction());
+      dispatch(fetchFavoritesFilmsAction());
     }
   }, [authorizationStatus, dispatch]);
-
-
-  const isFilmsLoading = useAppSelector(getIsFilmsLoading);
-  const promoFilm = useAppSelector(getPromoFilm);
-  const filmsCount = useAppSelector(getFilmsOpened);
 
   if(!promoFilm){
     return (<div></div>);

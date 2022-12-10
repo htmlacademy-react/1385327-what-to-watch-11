@@ -43,6 +43,9 @@ type UserData = {
   id: number;
   email: string;
   token: string;
+  avatarUrl: string;
+  name: string;
+
 };
 
 export type { Film, Review, NewReview, AuthData, UserData };

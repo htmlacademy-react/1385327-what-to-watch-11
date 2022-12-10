@@ -1,7 +1,7 @@
 import { useState, SyntheticEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { postNewReviewAction } from '../../store/api-actions';
-import { useNavigate } from 'react-router-dom';
 import { APIRoute, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 
 type AddReviewFormPropsType = {

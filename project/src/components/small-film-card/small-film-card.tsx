@@ -1,11 +1,11 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { AppRoute } from '../../const';
+import { AppRoute, PLAYER_DELAY } from '../../const';
+import { Film } from '../../types/types';
 
 import { resetFilmsList } from '../../store/films-process/films-process';
 
-import { Film } from '../../types/types';
 import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
@@ -24,7 +24,7 @@ function SmallFilmCard(props: SmallFilmCardProps): JSX.Element {
   const handleMouseOver = () => {
     timerId.current = setTimeout(() => {
       setActiveId(true);
-    }, 1000);
+    }, PLAYER_DELAY);
   };
 
   const handleMouseOut = () => {

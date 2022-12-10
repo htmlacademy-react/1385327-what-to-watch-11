@@ -38,6 +38,8 @@ export enum NameSpace {
   FavoritesFilms = 'FAVORITESFILMS',
 }
 
+export const PLAYER_DELAY = 1000;
+
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 
 export const MAX_GENRE_FILTER = 9;

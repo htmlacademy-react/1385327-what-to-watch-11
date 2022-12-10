@@ -3,13 +3,10 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
-
-// import { store } from '../../store';
-// import { fetchFilmsAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-process/selector';
-
-import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
+
+import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
@@ -23,8 +20,6 @@ import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
-
-  // store.dispatch(fetchFilmsAction());
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -80,4 +75,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;//authorizationStatus={authorizationStatus}
+export default App;
