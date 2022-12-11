@@ -29,6 +29,7 @@ export enum ScreenTab {
 }
 
 export enum NameSpace {
+  App = 'APP',
   User = 'USER',
   Films = 'FILMS',
   PromoFilm = 'PROMOFILM',
@@ -37,6 +38,8 @@ export enum NameSpace {
   Reviews = 'REVIEWS',
   FavoritesFilms = 'FAVORITESFILMS',
 }
+
+export const PLAYER_DELAY = 1000;
 
 export const DEFAULT_GENRE_FILTER = 'All Genres';
 

@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchCurrentFilmAction, fetchFavoritesAction } from '../../store/api-actions';//, fetchSimilarFilmsAction
+import { fetchCurrentFilmAction, fetchFavoritesFilmsAction } from '../../store/api-actions';
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
-// import { getIsSimilarFilmsLoading, getSimilarFilms } from '../../store/similar-films-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -14,7 +13,6 @@ import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import FilmTabs from '../../components/film-tabs/film-tabs';
-// import FilmsList from '../../components/films-list/films-list';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import MoreLikeThis from '../../components/more-like-this/more-like-this';
 
@@ -26,19 +24,14 @@ function FilmScreen(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
   const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
 
-  // const similarFilms = useAppSelector(getSimilarFilms);
-  // const isSimilarFilmsLoading = useAppSelector(getIsSimilarFilmsLoading);
-
   useEffect(() => {
     if (params.id && film?.id.toString() !== params.id) {
       dispatch(fetchCurrentFilmAction(params.id));
-      // dispatch(fetchSimilarFilmsAction(params.id));
-      // dispatch(fetchFavoritesAction());
     }
   }, [params.id, dispatch, film?.id]);
 
   useEffect(() => {
-    dispatch(fetchFavoritesAction());
+    dispatch(fetchFavoritesFilmsAction());
   }, [dispatch]);
 
   useEffect(() => {
@@ -52,7 +45,7 @@ function FilmScreen(): JSX.Element {
   return film ? (
     <>
       <Helmet>
-        <title>WTW. Film-page</title>
+        <title>WTW. {film.name}</title>
       </Helmet>
       <section className="film-card film-card--full" style={{background: `${film.backgroundColor}`}}>
         <div className="film-card__hero">
@@ -95,4 +88,4 @@ function FilmScreen(): JSX.Element {
     </>
   ) : <NoFoundScreen />;
 }
-export default FilmScreen;// {isSimilarFilmsLoading ? <LoadingScreen/> : <FilmsList films={similarFilms}/>}
+export default FilmScreen;

@@ -1,7 +1,8 @@
+import { fetchCurrentFilmAction } from '../api-actions';
+
 import { createSlice } from '@reduxjs/toolkit';
 import { CurrentFilmState } from '../../types/state';
 import { NameSpace } from '../../const';
-import { fetchCurrentFilmAction } from '../api-actions';
 
 const initialState: CurrentFilmState = {
   film: null,

@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Review } from '../../types/types';
 
 import { fetchReviewsAction } from '../../store/api-actions';
 import { getReviews, getIsReviewsLoading } from '../../store/reviews-process/selector';
 
 import LoadingScreen from '../loading-screen/loading-screen';
-import { Review } from '../../types/types';
-
 
 const getReview = (review: Review): JSX.Element => (
   <div className="review" key={review.id}>
@@ -21,7 +20,6 @@ const getReview = (review: Review): JSX.Element => (
     <div className="review__rating">{review.rating}</div>
   </div>
 );
-
 
 function FilmReviews(): JSX.Element {
 

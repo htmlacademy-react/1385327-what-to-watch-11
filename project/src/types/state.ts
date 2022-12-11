@@ -11,11 +11,14 @@ export type UserState = {
   authorizedUser: UserData | null;
 };
 
+export type AppState = {
+  currentGenre: string;
+  filmsOpen: number;
+};
+
 export type FilmsState = {
   films: Film[];
   isLoading: boolean;
-  currentGenre: string;
-  filmsOpen: number;
 };
 
 export type PromoFilmState = {

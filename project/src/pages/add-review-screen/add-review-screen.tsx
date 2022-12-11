@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
+import { AppRoute } from '../../const';
 
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
 import { fetchCurrentFilmAction } from '../../store/api-actions';
@@ -34,7 +35,7 @@ function AddReviewScreen(): JSX.Element {
   return film ? (
     <section className="film-card film-card--full" style={{background: `${film.backgroundColor}`}}>
       <Helmet>
-        <title>WTW. Review</title>
+        <title>WTW. {film.name} — Add review</title>
       </Helmet>
       <div className="film-card__header">
         <div className="film-card__bg">
@@ -48,7 +49,7 @@ function AddReviewScreen(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">{film.name}</a>
+                <a href={`${AppRoute.Film}/${film.id}`} className="breadcrumbs__link">{film.name}</a>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/">Add review</a>

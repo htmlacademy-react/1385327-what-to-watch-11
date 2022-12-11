@@ -1,7 +1,7 @@
+import { fetchFavoritesFilmsAction } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 import { FavoritesFilmsState } from '../../types/state';
 import { NameSpace } from '../../const';
-import { fetchFavoritesAction } from '../api-actions';
 
 const initialState: FavoritesFilmsState = {
   films: [],
@@ -14,14 +14,14 @@ export const favoritesFilmsProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchFavoritesAction.pending, (state) => {
+      .addCase(fetchFavoritesFilmsAction.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
+      .addCase(fetchFavoritesFilmsAction.fulfilled, (state, action) => {
         state.films = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchFavoritesAction.rejected, (state) => {
+      .addCase(fetchFavoritesFilmsAction.rejected, (state) => {
         state.isLoading = false;
       });
   }

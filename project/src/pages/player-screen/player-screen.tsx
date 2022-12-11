@@ -8,7 +8,6 @@ import { fetchCurrentFilmAction } from '../../store/api-actions';
 import { getIsCurrentFilmLoading, getCurrentFilm } from '../../store/current-film-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
-// import LoadingScreen from '../../components/loading-screen/loading-screen';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
 
 function PlayerScreen(): JSX.Element {
@@ -20,6 +19,7 @@ function PlayerScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const film = useAppSelector(getCurrentFilm);
+  const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [fullScreen, setFullScreen] = useState<boolean>(false);
@@ -121,8 +121,6 @@ function PlayerScreen(): JSX.Element {
     return () => setFullScreen(false);
   }, [fullScreen]);
 
-  const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
-
   if (isCurrentFilmLoading) {
     return (
       <LoadingSpinner />
@@ -164,7 +162,7 @@ function PlayerScreen(): JSX.Element {
   return (
     <div className="player">
       <Helmet>
-        <title>WTW. Player</title>
+        <title>WTW. {film.name} - Player</title>
       </Helmet>
       <video src={film?.videoLink} className="player__video" poster={film?.backgroundImage} ref={videoRef} muted ></video>
 

@@ -80,4 +80,4 @@ export default function FilmButtons(props: FilmButtonsProps): JSX.Element {
 
     </div>
   );
-} // {isFavorite ? getInListButton() : getAddButton()}
+}

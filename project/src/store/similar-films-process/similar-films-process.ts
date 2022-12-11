@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+
+import { fetchSimilarFilmsAction } from '../api-actions';
 import { SimilarFilmsState } from '../../types/state';
 import { NameSpace } from '../../const';
-import { fetchSimilarFilmsAction } from '../api-actions';
-
 
 const initialState: SimilarFilmsState = {
   films: [],
