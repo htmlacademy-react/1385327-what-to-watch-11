@@ -21,7 +21,7 @@ export const makeFakeFilm = (): Film => ({
   scoresCount: getRandomNumber(100500),
   director: getRandomFullName(),
   starring: Array.from({length: 3}, getRandomFullName),
-  runTime: getRandomNumber(5*60),
+  runTime: getRandomNumber(300),
   genre: music.genre(),
   released: getRandomDate(new Date(1970, 0, 1), new Date()),
   isFavorite: Math.random() < 0.5,

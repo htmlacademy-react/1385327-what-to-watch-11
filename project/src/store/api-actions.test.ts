@@ -5,9 +5,9 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 
 import { checkAuthAction, loginAction, logoutAction } from './api-actions';
-import {redirectToRoute} from './action';
+import { redirectToRoute } from './action';
 
-import { createAPI } from "../services/api";
+import { createAPI } from '../services/api';
 import { State } from '../types/state';
 import { AuthData } from '../types/types';
 import { APIRoute } from '../const';
@@ -16,13 +16,13 @@ import { APIRoute } from '../const';
 describe('Async actions', () => {
   const api = createAPI();
   const mockAPI = new MockAdapter(api);
-  const middlewares = [thunk.withExtraArgument(api)];
+  const middleware = [thunk.withExtraArgument(api)];
 
   const mockStore = configureMockStore<
     State,
     Action<string>,
     ThunkDispatch<State, typeof api, Action>
-  >(middlewares);
+  >(middleware);
 
   it('should authorization status is «auth» when server return 200', async () => {
     const store = mockStore();
