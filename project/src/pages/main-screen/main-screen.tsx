@@ -6,8 +6,9 @@ import { AuthorizationStatus } from '../../const';
 
 import { fetchPromoFilmAction, fetchFavoritesFilmsAction, fetchFilmsAction} from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
-import { createFilmsList } from '../../store/films-process/films-process';
-import { getFilmsOpened, getIsFilmsLoading, getFilteredFilms } from '../../store/films-process/selector';
+import { createFilmsList } from '../../store/app-process/app-process';
+import { getFilmsOpened, getFilteredFilms } from '../../store/app-process/selector';
+import { getIsFilmsLoading } from '../../store/films-process/selector';
 import { getPromoFilm } from '../../store/promo-film-process/selector';
 
 import GenresList from '../../components/genres-list/genres-list';

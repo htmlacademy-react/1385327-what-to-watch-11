@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 
-import { genreSet, resetFilmsList, genreReset } from '../../store/films-process/films-process';
-import { getCurrentGenre, getGenres } from '../../store/films-process/selector';
+import { genreSet, resetFilmsList, genreReset } from '../../store/app-process/app-process';
+import { getCurrentGenre, getGenres } from '../../store/app-process/selector';
 
 import { DEFAULT_GENRE_FILTER } from '../../const';
 

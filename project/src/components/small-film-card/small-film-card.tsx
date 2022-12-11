@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../hooks';
 import { AppRoute, PLAYER_DELAY } from '../../const';
 import { Film } from '../../types/types';
 
-import { resetFilmsList } from '../../store/films-process/films-process';
+import { resetFilmsList } from '../../store/app-process/app-process';
 
 import VideoPlayer from '../video-player/video-player';
 

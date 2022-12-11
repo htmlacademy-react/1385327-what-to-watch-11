@@ -1,7 +1,7 @@
+import { fetchFavoritesFilmsAction } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 import { FavoritesFilmsState } from '../../types/state';
 import { NameSpace } from '../../const';
-import { fetchFavoritesFilmsAction } from '../api-actions';
 
 const initialState: FavoritesFilmsState = {
   films: [],

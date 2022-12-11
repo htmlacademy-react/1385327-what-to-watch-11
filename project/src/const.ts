@@ -29,6 +29,7 @@ export enum ScreenTab {
 }
 
 export enum NameSpace {
+  App = 'APP',
   User = 'USER',
   Films = 'FILMS',
   PromoFilm = 'PROMOFILM',
