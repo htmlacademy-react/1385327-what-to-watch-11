@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchCurrentFilmAction, fetchFavoritesFilmsAction } from '../../store/api-actions';
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
+import { getIsAuthorized } from '../../store/user-process/selector';
 
 import NoFoundScreen from '../no-found-screen/no-found-screen';
 
@@ -23,6 +24,7 @@ function FilmScreen(): JSX.Element {
 
   const film = useAppSelector(getCurrentFilm);
   const isCurrentFilmLoading = useAppSelector(getIsCurrentFilmLoading);
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   useEffect(() => {
     if (params.id && film?.id.toString() !== params.id) {
@@ -31,8 +33,10 @@ function FilmScreen(): JSX.Element {
   }, [params.id, dispatch, film?.id]);
 
   useEffect(() => {
-    dispatch(fetchFavoritesFilmsAction());
-  }, [dispatch]);
+    if (isAuthorized) {
+      dispatch(fetchFavoritesFilmsAction());
+    }
+  }, [dispatch, isAuthorized]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
