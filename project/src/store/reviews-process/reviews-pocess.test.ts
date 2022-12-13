@@ -1,6 +1,5 @@
 import { fetchReviewsAction } from '../api-actions';
 import { reviewsProcess } from './reviews-process';
-
 import { Review } from '../../types/types';
 import { ReviewsState } from '../../types/state';
 import { makeFakeFilmComment } from '../../mocks/mocks';

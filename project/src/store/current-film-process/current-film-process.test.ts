@@ -1,6 +1,5 @@
 import { fetchCurrentFilmAction } from '../api-actions';
 import { currentFilmProcess } from './current-film-process';
-
 import { Film } from '../../types/types';
 import { CurrentFilmState } from '../../types/state';
 import { makeFakeFilm } from '../../mocks/mocks';

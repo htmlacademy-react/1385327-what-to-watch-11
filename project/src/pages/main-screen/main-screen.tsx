@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { AuthorizationStatus } from '../../const';
 
 import { fetchPromoFilmAction, fetchFavoritesFilmsAction, fetchFilmsAction} from '../../store/api-actions';
@@ -89,7 +89,7 @@ function MainScreen(): JSX.Element {
           <GenresList />
 
           {isFilmsLoading ? <LoadingScreen/> : <FilmsList films={films.slice(0, filmsCount)}/>}
-          {((films.length - filmsCount) > 0 ) && <ShowMore onClick={handleShowMoreButtonClick}/>}
+          {(films.length > filmsCount) && <ShowMore onClick={handleShowMoreButtonClick}/>}
         </section>
 
         <Footer />

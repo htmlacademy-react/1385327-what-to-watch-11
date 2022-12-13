@@ -49,9 +49,18 @@ export const MAX_COUNT = 8;
 
 export const SIMILAR_COUNT = 4;
 
-export const MIN_COMMENT_LENGTH = 50;
+export enum ReviewLength {
+  Min = 1,
+  Max = 400
+}
 
-export const MAX_COMMENT_LENGTH = 400;
+export enum Rating {
+  Bad = 0,
+  Normal = 3,
+  Good = 5,
+  VeryGood = 8,
+  Awesome = 10
+}
 
 export enum TimeValue {
   PreviewStartTimeout = 1000,
@@ -65,6 +74,7 @@ export enum ErrorMessage {
 }
 
 export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
+
 export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;
 
 export enum SingInField {

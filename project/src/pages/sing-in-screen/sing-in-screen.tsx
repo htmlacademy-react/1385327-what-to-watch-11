@@ -1,7 +1,7 @@
 import { useRef, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { AuthData } from '../../types/types';
 import { AppRoute, AuthorizationStatus, ErrorMessage, EMAIL_PATTERN, PASSWORD_PATTERN, SingInField } from '../../const';

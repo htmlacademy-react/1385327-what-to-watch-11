@@ -1,6 +1,5 @@
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 import { userProcess } from './user-process';
-
 import { UserData } from '../../types/types';
 import { UserState } from '../../types/state';
 import { AuthorizationStatus } from '../../const';

@@ -5,6 +5,7 @@ import { Film, AuthData, UserData, Review, NewReview } from '../types/types';
 import { APIRoute, AppRoute, SIMILAR_COUNT } from '../const';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
+import { toast } from 'react-toastify';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch;
@@ -12,7 +13,7 @@ export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchFilms',
-  async (_arg, {dispatch, extra: api}) => (await api.get<Film[]>(APIRoute.Films)).data,
+  async (_arg, {extra: api}) => (await api.get<Film[]>(APIRoute.Films)).data,
 );
 
 export const fetchCurrentFilmAction = createAsyncThunk<Film, string, {
@@ -21,7 +22,7 @@ export const fetchCurrentFilmAction = createAsyncThunk<Film, string, {
   extra: AxiosInstance;
 }>(
   'data/fetchCurrentFilm',
-  async (filmId, {dispatch, extra: api}) => (await api.get<Film>(`${APIRoute.Films}/${filmId}`)).data,
+  async (filmId, {extra: api}) => (await api.get<Film>(`${APIRoute.Films}/${filmId}`)).data,
 );
 
 export const fetchSimilarFilmsAction = createAsyncThunk<Film[], string, {
@@ -30,7 +31,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<Film[], string, {
   extra: AxiosInstance;
 }>(
   'data/fetchSimilarFilms',
-  async (filmId, {dispatch, extra: api}) =>
+  async (filmId, {extra: api}) =>
     (await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`)).data.filter((film) => film.id.toString() !== filmId).slice(0, SIMILAR_COUNT),
 );
 
@@ -40,7 +41,7 @@ export const fetchPromoFilmAction = createAsyncThunk<Film, undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchPromoFilm',
-  async (_arg, {dispatch, extra: api}) => (await api.get<Film>(APIRoute.Promo)).data,
+  async (_arg, {extra: api}) => (await api.get<Film>(APIRoute.Promo)).data,
 );
 
 export const fetchReviewsAction = createAsyncThunk<Review[], string, {
@@ -49,17 +50,30 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
   extra: AxiosInstance;
 }>(
   'data/fetchReviews',
-  async (filmId, {dispatch, extra: api}) => (await api.get<Review[]>(`${APIRoute.Review}/${filmId}`)).data,
+  async (filmId, {extra: api}) => (await api.get<Review[]>(`${APIRoute.Review}/${filmId}`)).data,
 );
 
-export const postNewReviewAction = createAsyncThunk<void, [number, NewReview], {
-    dispatch: AppDispatch;
-    stat: State;
-    extra: AxiosInstance;
+export const postNewReviewAction = createAsyncThunk<Review, {
+  userReview: NewReview;
+  setFormSubmitStateCb: React.Dispatch<React.SetStateAction<boolean>>;
+  activeId: number;
+  }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
 }>(
-  'data/postNewReview',
-  async ([filmId, {comment, rating}], {dispatch, extra: api}) => {
-    await api.post<Review>(`${APIRoute.Review}/${filmId}`, {comment, rating});
+  'user/postNewReview',
+  async (formData, {extra: api}) => {
+    const activeId = formData.activeId;
+    try {
+      const newReview: Review = (await api.post<Review>(`${APIRoute.Review}/${activeId}`, formData.userReview)).data;
+      formData.setFormSubmitStateCb(false);
+      return newReview;
+    } catch (err) {
+      toast.error('something went wrong please try again later...');
+      formData.setFormSubmitStateCb(true);
+      throw err;
+    }
   }
 );
 
@@ -69,7 +83,7 @@ export const fetchFavoritesFilmsAction = createAsyncThunk<Film[], undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchFavoritesFilm',
-  async (_arg, {dispatch, extra: api}) => (await api.get<Film[]>(APIRoute.Favorites)).data,
+  async (_arg, {extra: api}) => (await api.get<Film[]>(APIRoute.Favorites)).data,
 );
 
 export const postFavoriteStatusAction = createAsyncThunk<void, [number, boolean], {
@@ -90,7 +104,7 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => (await api.get<UserData>(APIRoute.Login)).data,
+  async (_arg, {extra: api}) => (await api.get<UserData>(APIRoute.Login)).data,
 );
 
 export const loginAction = createAsyncThunk<UserData, AuthData, {
@@ -113,7 +127,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
   },

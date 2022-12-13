@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { AppRoute } from '../../const';
 
 import { postFavoriteStatusAction } from '../../store/api-actions';

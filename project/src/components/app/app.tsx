@@ -6,7 +6,7 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 import { getAuthorizationStatus } from '../../store/user-process/selector';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';

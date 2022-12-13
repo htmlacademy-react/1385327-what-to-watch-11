@@ -1,5 +1,4 @@
 import { appProcess, genreSet, genreReset, createFilmsList, resetFilmsList } from './app-process';
-
 import { Film } from '../../types/types';
 import { makeFakeFilm } from '../../mocks/mocks';
 import { DEFAULT_GENRE_FILTER, MAX_COUNT } from '../../const';

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { fetchPromoFilmAction } from '../api-actions';
 import { PromoFilmState } from '../../types/state';
 import { NameSpace } from '../../const';

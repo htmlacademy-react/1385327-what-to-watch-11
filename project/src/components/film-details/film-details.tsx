@@ -8,7 +8,7 @@ type FilmDetailsProps = {
 function FilmDetails(props: FilmDetailsProps): JSX.Element {
   const { film } = props;
 
-  const actorList = film.starring.join(', \n'); // имена не влезают в строчку-------------------------------------------------------------------
+  const actorList = film.starring.join(', \n');
 
   return (
     <div className="film-card__text film-card__row">
@@ -39,7 +39,6 @@ function FilmDetails(props: FilmDetailsProps): JSX.Element {
       </div>
     </div>
   );
-
 
 }
 export default FilmDetails;
