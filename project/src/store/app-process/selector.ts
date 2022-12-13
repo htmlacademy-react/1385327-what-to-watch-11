@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit';
-
 import { Film } from '../../types/types';
 import { State } from '../../types/state';
 import { DEFAULT_GENRE_FILTER, MAX_GENRE_FILTER, NameSpace } from '../../const';

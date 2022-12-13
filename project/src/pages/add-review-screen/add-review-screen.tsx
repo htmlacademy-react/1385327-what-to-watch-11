@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { AppRoute } from '../../const';
 
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';

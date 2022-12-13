@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
 import { fetchFavoritesFilmsAction } from '../../store/api-actions';
 import { getFavoritesFilms, getIsFavoritesFilmsLoading } from '../../store/favorites-films-process/selector';

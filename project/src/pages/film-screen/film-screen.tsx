@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { fetchCurrentFilmAction, fetchFavoritesFilmsAction } from '../../store/api-actions';
 import { getCurrentFilm, getIsCurrentFilmLoading } from '../../store/current-film-process/selector';
 import { getIsAuthorized } from '../../store/user-process/selector';

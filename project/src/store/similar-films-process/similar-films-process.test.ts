@@ -1,6 +1,5 @@
 import { fetchSimilarFilmsAction } from '../api-actions';
 import { similarFilmsProcess } from './similar-films-process';
-
 import { Film } from '../../types/types';
 import { SimilarFilmsState } from '../../types/state';
 import { makeFakeFilm } from '../../mocks/mocks';

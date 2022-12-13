@@ -15,9 +15,7 @@
   }
 
   .refreshing-loader:not(:required) {
-
     animation: refreshing-loader 1000ms infinite linear;
-
     border-radius: 2.4em;
     border: 0.4em solid #9ac;
     border-left-color: transparent;

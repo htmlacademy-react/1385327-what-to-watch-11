@@ -1,6 +1,5 @@
 import { fetchPromoFilmAction } from '../api-actions';
 import { promoFilmProcess } from './promo-film-process';
-
 import { Film } from '../../types/types';
 import { PromoFilmState } from '../../types/state';
 import { makeFakeFilm } from '../../mocks/mocks';

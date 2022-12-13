@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { fetchSimilarFilmsAction } from '../../store/api-actions';
 import { getIsSimilarFilmsLoading, getSimilarFilms } from '../../store/similar-films-process/selector';

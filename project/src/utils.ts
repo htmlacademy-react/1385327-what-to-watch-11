@@ -1,13 +1,4 @@
-// const getFormatTime = (time: number) => {
-
-//   if (time >= 60) {
-//     const hours = Math.floor(time / 60);
-//     const minutes = time - hours * 60;
-//     return `${hours}:${minutes}:00`;
-//   } else {
-//     return `${time}:00`;
-//   }
-// };
+import { Rating } from './const';
 
 const getFormatHoursAndMinutes = (time: number) => {
 
@@ -21,22 +12,22 @@ const getFormatHoursAndMinutes = (time: number) => {
 };
 
 const getScoresRating = (rating: number) => {
-  if (rating >= 0 && rating < 3) {
+  if (rating >= Rating.Bad && rating < Rating.Normal) {
     return 'Bad';
   }
-  if (rating >= 3 && rating < 5) {
+  if (rating >= Rating.Normal && rating < Rating.Good) {
     return 'Normal';
   }
-  if (rating >= 5 && rating < 8) {
+  if (rating >= Rating.Good && rating < Rating.VeryGood) {
     return 'Good';
   }
-  if (rating >= 8 && rating < 10) {
+  if (rating >= Rating.VeryGood && rating < Rating.Awesome) {
     return 'Very good';
   }
-  if (rating === 10) {
+  if (rating === Rating.Awesome) {
     return 'Awesome';
   }
   return 'NaN';
 };
 
-export { getFormatHoursAndMinutes, getScoresRating }; // getFormatTime,
+export { getFormatHoursAndMinutes, getScoresRating };

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { genreSet, resetFilmsList, genreReset } from '../../store/app-process/app-process';
 import { getCurrentGenre, getGenres } from '../../store/app-process/selector';

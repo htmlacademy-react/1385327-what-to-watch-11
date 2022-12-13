@@ -1,8 +1,8 @@
-import { useState, SyntheticEvent, FormEvent } from 'react';
+import { useState, SyntheticEvent, FormEvent, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import { postNewReviewAction } from '../../store/api-actions';
-import { APIRoute, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+import { APIRoute, ReviewLength, Rating } from '../../const';
 
 type AddReviewFormPropsType = {
   filmId: number;
@@ -16,8 +16,9 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
-    isFormDisabled: false,
   });
+
+  const [formSubmitState, setFormSubmitState] = useState(true);
 
   const handleFormChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLTextAreaElement | HTMLInputElement;
@@ -33,56 +34,33 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (formData.rating && formData.comment) {
-      setFormData({...formData, isFormDisabled: true});
-      const [comment, rating] = [formData.comment, formData.rating];
-      dispatch(postNewReviewAction([filmId, {comment, rating}]));
-      navigate(`${APIRoute.Films}/${filmId.toString()}`);
-    }
+    setFormSubmitState(false);
+    dispatch(postNewReviewAction({userReview: formData, setFormSubmitStateCb: setFormSubmitState, activeId: filmId}));
+    navigate(`${APIRoute.Films}/${filmId.toString()}`);
   };
+
+  const starsList = Array.from({length: Rating.Awesome}, (_, i) => {
+    const key = String(Rating.Awesome - i);
+    return (
+      <Fragment key={key}>
+        <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} disabled={formSubmitState === false}/>
+        <label className="rating__label" htmlFor={`star-${key}`}>{`Rating ${key}`}</label>
+      </Fragment>
+    );
+  });
 
   return (
     <form action="#" className="add-review__form" onChange={handleFormChange} onSubmit={handleFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
-          <input className="rating__input" id="star-10" type="radio" name="rating" value="10" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-10">Rating 10</label>
-
-          <input className="rating__input" id="star-9" type="radio" name="rating" value="9" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-9">Rating 9</label>
-
-          <input className="rating__input" id="star-8" type="radio" name="rating" value="8" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-8">Rating 8</label>
-
-          <input className="rating__input" id="star-7" type="radio" name="rating" value="7" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-7">Rating 7</label>
-
-          <input className="rating__input" id="star-6" type="radio" name="rating" value="6" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-6">Rating 6</label>
-
-          <input className="rating__input" id="star-5" type="radio" name="rating" value="5" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-5">Rating 5</label>
-
-          <input className="rating__input" id="star-4" type="radio" name="rating" value="4" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-          <input className="rating__input" id="star-3" type="radio" name="rating" value="3" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-          <input className="rating__input" id="star-2" type="radio" name="rating" value="2" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-          <input className="rating__input" id="star-1" type="radio" name="rating" value="1" disabled={formData.isFormDisabled}/>
-          <label className="rating__label" htmlFor="star-1">Rating 1</label>
+          {starsList}
         </div>
       </div>
-
       <div className="add-review__text" style={{background: '#FFFFFF', opacity: '50%'}}>
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={formData.isFormDisabled}></textarea>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={formSubmitState === false}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={formData.isFormDisabled || !(formData.comment.length > MIN_COMMENT_LENGTH && formData.comment.length < MAX_COMMENT_LENGTH && formData.rating !== 0)}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={formSubmitState === false || !(formData.comment.length > ReviewLength.Min && formData.comment.length < ReviewLength.Max && formData.rating !== 0)}>Post</button>
         </div>
-
       </div>
     </form>
   );

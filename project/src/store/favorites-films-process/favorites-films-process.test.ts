@@ -1,6 +1,5 @@
 import { fetchFavoritesFilmsAction } from '../api-actions';
 import { favoritesFilmsProcess } from './favorites-films-process';
-
 import { Film } from '../../types/types';
 import { FavoritesFilmsState } from '../../types/state';
 import { makeFakeFilm } from '../../mocks/mocks';
