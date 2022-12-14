@@ -1,8 +1,7 @@
 import { useState, SyntheticEvent, FormEvent, Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/hooks';
 import { postNewReviewAction } from '../../store/api-actions';
-import { APIRoute, ReviewLength, Rating } from '../../const';
+import { ReviewLength, Rating } from '../../const';
 
 type AddReviewFormPropsType = {
   filmId: number;
@@ -11,7 +10,6 @@ type AddReviewFormPropsType = {
 function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     rating: 0,
@@ -36,14 +34,13 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
 
     setFormSubmitState(false);
     dispatch(postNewReviewAction({userReview: formData, setFormSubmitStateCb: setFormSubmitState, activeId: filmId}));
-    navigate(`${APIRoute.Films}/${filmId.toString()}`);
   };
 
   const starsList = Array.from({length: Rating.Awesome}, (_, i) => {
     const key = String(Rating.Awesome - i);
     return (
       <Fragment key={key}>
-        <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} disabled={formSubmitState === false}/>
+        <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} disabled={!formSubmitState}/>
         <label className="rating__label" htmlFor={`star-${key}`}>{`Rating ${key}`}</label>
       </Fragment>
     );
@@ -57,9 +54,9 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
         </div>
       </div>
       <div className="add-review__text" style={{background: '#FFFFFF', opacity: '50%'}}>
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={formSubmitState === false}></textarea>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={!formSubmitState}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={formSubmitState === false || !(formData.comment.length > ReviewLength.Min && formData.comment.length < ReviewLength.Max && formData.rating !== 0)}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={!formSubmitState || !(formData.comment.length > ReviewLength.Min && formData.comment.length < ReviewLength.Max && formData.rating !== 0)}>Post</button>
         </div>
       </div>
     </form>

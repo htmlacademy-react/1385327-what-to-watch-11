@@ -2,7 +2,7 @@ export enum AppRoute {
   Root = '/',
   SignIn = '/login',
   MyList = '/mylist',
-  Film = '/films',
+  Film = '/films/:id',
   AddReview = '/review',
   Player = '/player',
 }
@@ -50,7 +50,7 @@ export const MAX_COUNT = 8;
 export const SIMILAR_COUNT = 4;
 
 export enum ReviewLength {
-  Min = 1,
+  Min = 50,
   Max = 400
 }
 
