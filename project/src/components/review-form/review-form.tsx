@@ -56,7 +56,7 @@ function ReviewForm({filmId}: AddReviewFormPropsType): JSX.Element {
       <div className="add-review__text" style={{background: '#FFFFFF', opacity: '50%'}}>
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={!formSubmitState}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={!formSubmitState || !(formData.comment.length > ReviewLength.Min && formData.comment.length < ReviewLength.Max && formData.rating !== 0)}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={formSubmitState && !(formData.comment.length >= ReviewLength.Min && formData.comment.length <= ReviewLength.Max && formData.rating !== 0)}>Post</button>
         </div>
       </div>
     </form>
