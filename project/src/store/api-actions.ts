@@ -63,11 +63,11 @@ export const postNewReviewAction = createAsyncThunk<Review, {
   extra: AxiosInstance;
 }>(
   'user/postNewReview',
-  async (formData, {extra: api}) => {
-    const activeId = formData.activeId;
+  async (formData, {dispatch, extra: api}) => {
     try {
-      const newReview: Review = (await api.post<Review>(`${APIRoute.Review}/${activeId}`, formData.userReview)).data;
+      const newReview: Review = (await api.post<Review>(`${APIRoute.Review}/${formData.activeId}`, formData.userReview)).data;
       formData.setFormSubmitStateCb(false);
+      dispatch(redirectToRoute(`${AppRoute.Film}/${formData.activeId}`));
       return newReview;
     } catch (err) {
       toast.error('something went wrong please try again later...');
