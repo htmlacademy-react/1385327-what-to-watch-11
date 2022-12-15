@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 import { getAuthorizationStatus } from '../../store/user-process/selector';
