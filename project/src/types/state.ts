@@ -19,6 +19,7 @@ export type AppState = {
 export type FilmsState = {
   films: Film[];
   isLoading: boolean;
+  hasError: boolean;
 };
 
 export type PromoFilmState = {
