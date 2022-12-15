@@ -6,6 +6,7 @@ import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { getErrorStatus } from '../../store/films-process/selector';
 import { useAppSelector } from '../../hooks/hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
@@ -16,19 +17,25 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sing-in-screen/sing-in-screen';
+import ErrorScreen from '../../pages/error-screen/error-screen';
 
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const hasError = useAppSelector(getErrorStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
     );
   }
-
+  if (hasError) {
+    return (
+      <ErrorScreen />
+    );
+  }
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
